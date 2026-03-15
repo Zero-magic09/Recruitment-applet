@@ -1,0 +1,497 @@
+/* 简历编辑页样式 - 紫色主题 */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.content {
+  flex: 1;
+  padding-bottom: 120rpx;
+}
+
+/* ========== 区块样式 ========== */
+.section {
+  background: rgba(255, 255, 255, 0.95);
+  width: 690rpx;
+  margin: 0 auto 24rpx;
+  padding: 40rpx 30rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20rpx);
+  box-sizing: border-box;
+}
+
+.section:first-child {
+  margin-top: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding-left: 20rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.section-header .section-title {
+  margin-bottom: 0;
+}
+
+/* ========== 头像上传 ========== */
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+  padding: 20rpx 0;
+}
+
+.avatar {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 4rpx solid #667eea;
+  box-shadow: 0 16rpx 48rpx rgba(102, 126, 234, 0.3);
+  transition: all 0.3s;
+  overflow: hidden;
+  object-fit: contain;
+  display: block;
+  background: #f5f7fa;
+}
+
+.avatar-upload:active .avatar {
+  transform: scale(0.95);
+}
+
+.upload-tip {
+  font-size: 24rpx;
+  color: rgba(102, 126, 234, 0.8);
+  background: rgba(102, 126, 234, 0.1);
+  padding: 8rpx 24rpx;
+  border-radius: 20rpx;
+}
+
+/* ========== 表单项 ========== */
+.form-item {
+  display: flex;
+  align-items: center;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.form-item:focus-within {
+  background: #ffffff;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+}
+
+.label {
+  width: 180rpx;
+  font-size: 28rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+.required {
+  color: #ff4444;
+  margin-left: 4rpx;
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  background: transparent;
+}
+
+.picker {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* ========== 薪资范围 ========== */
+.salary-range {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.input-small {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  text-align: center;
+  background: transparent;
+}
+
+.separator {
+  font-size: 28rpx;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* ========== 技能标签 ========== */
+.skills-input {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 24rpx;
+}
+
+.skills-input .input {
+  flex: 1;
+  border: 2rpx solid transparent;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  font-size: 28rpx;
+  background: #f5f7fa;
+  transition: all 0.3s;
+}
+
+.skills-input .input:focus {
+  border-color: #667eea;
+  background: #ffffff;
+  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 12rpx 32rpx rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.add-btn-small {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border-radius: 16rpx;
+  padding: 12rpx 28rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.skill-tag {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 14rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  border: 2rpx solid rgba(102, 126, 234, 0.2);
+  transition: all 0.3s;
+}
+
+.skill-tag:active {
+  transform: scale(0.95);
+  background: rgba(102, 126, 234, 0.15);
+}
+
+.skill-tag .remove-btn {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* 技能认证提示 */
+.cert-tip {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.2);
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  font-size: 26rpx;
+  color: #667eea;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* 证书列表 */
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.cert-card {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 24rpx;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.2);
+  border-radius: 16rpx;
+  transition: all 0.3s;
+}
+
+.cert-card:active {
+  transform: scale(0.98);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.cert-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+  flex-shrink: 0;
+}
+
+.badge-icon {
+  font-size: 48rpx;
+}
+
+.badge-level {
+  font-size: 22rpx;
+  font-weight: bold;
+}
+
+.cert-info-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.cert-category {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.cert-score {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.cert-arrow {
+  color: #667eea;
+  font-size: 24rpx;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* ========== 经历列表 ========== */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.experience-item {
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  border: 2rpx solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.experience-item:active {
+  border-color: #667eea;
+  background: #ffffff;
+  transform: scale(0.98);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.exp-title {
+  flex: 1;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 20rpx;
+}
+
+.exp-actions {
+  display: flex;
+  gap: 12rpx;
+  flex-shrink: 0;
+}
+
+.edit-btn {
+  font-size: 24rpx;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+}
+
+.edit-btn:active {
+  background: rgba(102, 126, 234, 0.2);
+  transform: scale(0.95);
+}
+
+.exp-header .remove-btn {
+  font-size: 24rpx;
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+}
+
+.exp-header .remove-btn:active {
+  background: rgba(255, 107, 107, 0.2);
+  transform: scale(0.95);
+}
+
+.exp-time {
+  display: block;
+  font-size: 24rpx;
+  color: #667eea;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.exp-desc {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* ========== 文本域 ========== */
+.textarea {
+  width: 100%;
+  min-height: 240rpx;
+  border: 2rpx solid transparent;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  font-size: 28rpx;
+  line-height: 1.8;
+  background: #f5f7fa;
+  color: #333;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  border-color: #667eea;
+  background: #ffffff;
+  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+}
+
+/* ========== 空状态 ========== */
+.empty {
+  text-align: center;
+  padding: 60rpx 0;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.bottom-placeholder {
+  height: 40rpx;
+}
+
+/* ========== 底部操作栏 ========== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 24rpx 30rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -16rpx 48rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 20rpx;
+  z-index: 100;
+}
+
+.btn-secondary {
+  flex: 1;
+  background: #ffffff;
+  color: #667eea;
+  border: 2rpx solid #667eea;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 24rpx 0;
+  transition: all 0.3s;
+}
+
+.btn-secondary:active {
+  background: rgba(102, 126, 234, 0.05);
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  flex: 2;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 24rpx 0;
+  border: none;
+  box-shadow: 0 12rpx 32rpx rgba(102, 126, 234, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:active::after {
+  width: 600rpx;
+  height: 600rpx;
+}

@@ -1,0 +1,96 @@
+<!-- 企业岗位发布页 -->
+<view class="container">
+  <scroll-view scroll-y class="content">
+    <view class="section">
+      <view class="section-title">基本信息</view>
+      <view class="form-item">
+        <text class="label">职位名称 <text class="required">*</text></text>
+        <input class="input" placeholder="如:前端开发工程师" value="{{job.title}}" data-field="title" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">工作城市 <text class="required">*</text></text>
+        <input class="input" placeholder="如:深圳" value="{{job.city}}" data-field="city" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">薪资范围 <text class="required">*</text></text>
+        <view class="salary-range">
+          <input class="input-small" type="number" placeholder="最低(K/月)" value="{{job.salaryMin}}" data-field="salaryMin" bindinput="onInput" />
+          <text class="separator">-</text>
+          <input class="input-small" type="number" placeholder="最高(K/月)" value="{{job.salaryMax}}" data-field="salaryMax" bindinput="onInput" />
+        </view>
+      </view>
+      <view class="form-item">
+        <text class="label">工作经验</text>
+        <picker mode="selector" range="{{experienceArray}}" value="{{experienceArray.indexOf(job.experience)}}" bindchange="onExperienceChange">
+          <view class="picker">{{job.experience}}</view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="label">学历要求</text>
+        <picker mode="selector" range="{{educationArray}}" value="{{educationArray.indexOf(job.education)}}" bindchange="onEducationChange">
+          <view class="picker">{{job.education}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">职位描述</view>
+      <textarea class="textarea" placeholder="请输入职位描述" value="{{job.description}}" data-field="description" bindinput="onInput" maxlength="1000" />
+    </view>
+
+    <view class="section">
+      <view class="section-title">任职要求</view>
+      <textarea class="textarea" placeholder="请输入任职要求" value="{{job.requirements}}" data-field="requirements" bindinput="onInput" maxlength="1000" />
+    </view>
+
+    <view class="section">
+      <view class="section-title">技能标签</view>
+      <view class="tag-input">
+        <input class="input" placeholder="输入技能标签" value="{{tagInput}}" bindinput="onTagInput" bindconfirm="addTag" />
+        <button class="add-btn" bindtap="addTag">添加</button>
+      </view>
+      <view class="tag-list">
+        <view class="tag" wx:for="{{job.tags}}" wx:key="index">
+          <text>{{item}}</text>
+          <text class="remove-btn" bindtap="removeTag" data-index="{{index}}">×</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">福利待遇</view>
+      <view class="tag-input">
+        <input class="input" placeholder="输入福利" value="{{benefitInput}}" bindinput="onBenefitInput" bindconfirm="addBenefit" />
+        <button class="add-btn" bindtap="addBenefit">添加</button>
+      </view>
+      <view class="tag-list">
+        <view class="tag benefit-tag" wx:for="{{job.benefits}}" wx:key="index">
+          <text>{{item}}</text>
+          <text class="remove-btn" bindtap="removeBenefit" data-index="{{index}}">×</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">视频介绍</view>
+      <button class="upload-btn" bindtap="uploadVideo">
+        {{job.videoUrl ? '重新上传' : '上传视频'}}
+      </button>
+      <text class="tip" wx:if="{{job.videoUrl}}">✓ 视频已上传</text>
+    </view>
+
+    <view class="section">
+      <view class="section-title">工作地点</view>
+      <button class="upload-btn" bindtap="selectLocation">
+        {{job.location ? '重新选择' : '选择位置'}}
+      </button>
+      <text class="tip" wx:if="{{job.location}}">{{job.location.address}}</text>
+    </view>
+
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <button class="btn-primary" bindtap="publish">{{isEdit ? '保存岗位' : '发布岗位'}}</button>
+  </view>
+</view>

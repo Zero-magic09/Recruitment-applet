@@ -1,0 +1,49 @@
+<!-- 面试列表页 -->
+<view class="container">
+  <view class="list">
+    <view 
+      class="interview-item" 
+      wx:for="{{interviews}}" 
+      wx:key="_id"
+      style="transform: translateX({{item.translateX || 0}}rpx)"
+      bindtouchstart="touchStart"
+      bindtouchmove="touchMove"
+      bindtouchend="touchEnd"
+      data-index="{{index}}"
+      data-id="{{item._id}}"
+    >
+      <view class="item-content" bindtap="goToDetail" data-id="{{item._id}}">
+        <view class="item-header">
+          <text class="job-title">{{item.jobTitle}}</text>
+          <text class="status status-{{item.status}}">{{statusMap[item.status]}}</text>
+        </view>
+        <view class="info-row company-info">
+          <text class="label"><text class="icon">🏢</text> 公司名称：</text>
+          <text class="value">{{item.companyName}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">📅 面试时间：</text>
+          <text class="value">{{item.interviewTime || '待企业确认'}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">📍 面试地点：</text>
+          <text class="value">{{item.location || '待企业确认'}}</text>
+        </view>
+        <view class="info-row" wx:if="{{item.notes}}">
+          <text class="label">💬 备注：</text>
+          <text class="value">{{item.notes}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!loading && interviews.length === 0}}">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text" wx:if="{{jobId}}">该岗位暂无面试安排资格</text>
+      <text class="empty-text" wx:else>暂无面试安排</text>
+      <text class="empty-tip" wx:if="{{jobId}}">只有当企业将您的状态更新为"面试中"并您预约面试后，才会显示在这里</text>
+      <text class="empty-tip" wx:else>当企业邀请您面试时，会显示在这里</text>
+    </view>
+  </view>
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

@@ -1,0 +1,204 @@
+<!-- 求职者首页 -->
+<view class="container">
+  <!-- 顶部信息栏 -->
+  <view class="header">
+    <!-- 用户信息卡片 -->
+    <view class="user-card" wx:if="{{userInfo}}">
+      <!-- 右上角退出按钮 -->
+      <view class="close-btn" bindtap="handleLogout">
+        <text class="close-icon">×</text>
+      </view>
+      <view class="user-left" bindtap="goToResumeEdit">
+        <view class="avatar-wrapper">
+          <image class="avatar" src="{{userInfo.avatar || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}" mode="aspectFill" />
+          <view class="online-dot"></view>
+        </view>
+        <view class="user-info">
+          <view class="user-name-row">
+            <text class="user-name">{{userInfo.name || '用户'}}</text>
+            <view class="cert-badge {{userInfo.certLevel ? '' : 'cert-badge-empty'}}">
+              <text class="cert-text">
+                {{userInfo.certLevel === 'junior' ? '初级认证' : (userInfo.certLevel === 'intermediate' ? '中级认证' : (userInfo.certLevel === 'senior' ? '高级认证' : '暂未认证'))}}
+              </text>
+            </view>
+          </view>
+          <text class="user-position {{userInfo.resume && userInfo.resume.expectedPosition ? '' : 'position-empty'}}">{{(userInfo.resume && userInfo.resume.expectedPosition) || '暂未填写，及时完善简历信息'}}</text>
+          <view class="user-tags" wx:if="{{userInfo.resume}}">
+            <view class="user-tag">
+              <text class="tag-icon">👤</text>
+              <text class="tag-text">{{userInfo.resume.gender || '保密'}}</text>
+            </view>
+            <view class="user-tag">
+              <text class="tag-icon">🎂</text>
+              <text class="tag-text">{{userInfo.resume.age ? userInfo.resume.age + '岁' : '保密'}}</text>
+            </view>
+            <view class="user-tag">
+              <text class="tag-icon">📍</text>
+              <text class="tag-text">{{userInfo.resume.expectedCity || '保密'}}</text>
+            </view>
+          </view>
+          <view class="user-tags" wx:else>
+            <view class="user-tag">
+              <text class="tag-text">点击完善简历</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 加载中状态 -->
+    <view class="user-card loading-card" wx:else>
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 快捷操作区域 -->
+    <view class="action-cards">
+      <view class="action-card" bindtap="goToApplications">
+        <view class="card-icon card-icon-blue">
+          <text>📄</text>
+        </view>
+        <text class="card-title">投递记录</text>
+        <text class="card-subtitle">活跃跟踪</text>
+      </view>
+      <view class="action-card" bindtap="goToInterviews">
+        <view class="card-icon card-icon-purple">
+          <text>📅</text>
+        </view>
+        <text class="card-title">面试安排</text>
+        <text class="card-subtitle">日程管理</text>
+      </view>
+      <view class="action-card" bindtap="goToSalaryAnalysis">
+        <view class="card-icon card-icon-pink">
+          <text>📊</text>
+        </view>
+        <text class="card-title">薪资分析</text>
+        <text class="card-subtitle">市场数据</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索职位、公司" value="{{searchKeyword}}" bindinput="onSearchInput" bindconfirm="onSearch" />
+    <view class="search-btn" bindtap="onSearch">搜索</view>
+    <view wx:if="{{isSearchMode}}" class="clear-btn" bindtap="clearSearch">✕</view>
+  </view>
+
+  <!-- 标签切换 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'nearby' ? 'active' : ''}}" bindtap="switchTab" data-tab="nearby">
+      <text>附近岗位</text>
+    </view>
+    <view class="tab {{activeTab === 'recommend' ? 'active' : ''}}" bindtap="switchTab" data-tab="recommend">
+      <text>热门推荐</text>
+    </view>
+    <view class="tab {{activeTab === 'match' ? 'active' : ''}}" bindtap="switchTab" data-tab="match">
+      <text>智能匹配</text>
+    </view>
+  </view>
+
+  <!-- 搜索结果标题 -->
+  <view class="search-result-header" wx:if="{{isSearchMode}}">
+    <text class="search-title">搜索结果</text>
+    <text class="search-count">共找到 {{filteredJobs.length}} 个相关岗位</text>
+  </view>
+
+  <!-- 岗位列表 -->
+  <view class="job-list">
+    <!-- 附近岗位 -->
+    <block wx:if="{{activeTab === 'nearby'}}">
+      <!-- 位置权限被拒绝提示 -->
+      <view class="permission-denied" wx:if="{{locationDenied}}">
+        <text class="icon">📍</text>
+        <text class="title">暂无位置权限</text>
+        <text class="desc">请授权后刷新页面</text>
+        <button class="auth-btn" bindtap="openLocationSetting">去授权</button>
+      </view>
+      <!-- 正常岗位列表 -->
+      <block wx:else>
+        <view class="job-item" wx:for="{{filteredJobs}}" wx:key="_id" bindtap="goToJobDetail" data-id="{{item._id}}">
+          <view class="job-header">
+            <view class="job-title-row">
+              <text class="job-title">{{item.title}}</text>
+              <text class="video-tag" wx:if="{{item.videoUrl}}">📹视频</text>
+            </view>
+            <text class="job-salary">{{item.salaryMin}}-{{item.salaryMax}}K</text>
+          </view>
+          <view class="job-tags">
+            <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+          </view>
+          <view class="job-footer">
+            <view class="company-info">
+              <text class="company-name">{{item.companyName}}</text>
+              <text class="location">{{item.displayCity || item.city}}</text>
+            </view>
+            <text class="distance" wx:if="{{item.distanceText}}">{{item.distanceText}}</text>
+          </view>
+        </view>
+        <view class="empty" wx:if="{{!loading && filteredJobs.length === 0}}">
+          <text>{{isSearchMode ? '没有找到相关岗位' : '暂无附近岗位'}}</text>
+        </view>
+      </block>
+    </block>
+
+    <!-- 推荐岗位 -->
+    <block wx:if="{{activeTab === 'recommend'}}">
+      <view class="job-item" wx:for="{{filteredJobs}}" wx:key="_id" bindtap="goToJobDetail" data-id="{{item._id}}">
+        <view class="job-header">
+          <view class="job-title-row">
+            <text class="job-title">{{item.title}}</text>
+            <text class="video-tag" wx:if="{{item.videoUrl}}">📹视频</text>
+          </view>
+          <text class="job-salary">{{item.salaryMin}}-{{item.salaryMax}}K</text>
+        </view>
+        <view class="job-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+        </view>
+        <view class="job-footer">
+          <view class="company-info">
+            <text class="company-name">{{item.companyName}}</text>
+            <text class="location">{{item.displayCity || item.city}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!loading && filteredJobs.length === 0}}">
+        <text>{{isSearchMode ? '没有找到相关岗位' : '暂无推荐岗位'}}</text>
+      </view>
+    </block>
+
+    <!-- 匹配岗位 -->
+    <block wx:if="{{activeTab === 'match'}}">
+      <view class="no-resume" wx:if="{{!hasResume}}">
+        <text class="tip">完善简历后可获得智能匹配推荐</text>
+        <button class="btn" bindtap="goToResumeEdit">去完善简历</button>
+      </view>
+      <block wx:else>
+        <view class="job-item" wx:for="{{filteredJobs}}" wx:key="_id" bindtap="goToJobDetail" data-id="{{item._id}}">
+          <view class="job-header">
+            <view class="job-title-row">
+              <text class="job-title">{{item.title}}</text>
+              <text class="match-score">匹配度 {{item.matchScore}}%</text>
+            </view>
+            <text class="job-salary">{{item.salaryMin}}-{{item.salaryMax}}K</text>
+          </view>
+          <view class="job-tags">
+            <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+          </view>
+          <view class="job-footer">
+            <view class="company-info">
+              <text class="company-name">{{item.companyName}}</text>
+              <text class="location">{{item.displayCity || item.city}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="empty" wx:if="{{!loading && filteredJobs.length === 0}}">
+          <text>{{isSearchMode ? '没有找到相关岗位' : '暂无匹配岗位'}}</text>
+        </view>
+      </block>
+    </block>
+  </view>
+
+  <!-- 加载提示 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

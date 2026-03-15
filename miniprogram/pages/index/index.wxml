@@ -1,0 +1,73 @@
+<view class="container">
+
+  <!-- 背景装饰 -->
+  <view class="orb orb-1"></view>
+  <view class="orb orb-2"></view>
+
+  <view class="header">
+    <view class="header-tag">
+      <text class="tag-text">智能匹配系统</text>
+    </view>
+    <view class="header-title">职场速约</view>
+  </view>
+
+  <view class="main">
+    <view class="card" bindtap="onRoleTap" data-role="seeker">
+      <view class="icon-box blue-grad">
+        <view class="icon-briefcase"></view>
+      </view>
+      <view class="card-content">
+        <view class="title">我想寻找机遇</view>
+        <view class="subtitle">CAREER SEEKER</view>
+      </view>
+      <view class="tag-row">
+        <text class="tag">智能匹配</text>
+        <text class="tag">高薪职位</text>
+        <text class="tag">即时沟通</text>
+      </view>
+    </view>
+
+    <view class="card" bindtap="onRoleTap" data-role="hunter">
+      <view class="icon-box purple-grad">
+        <view class="icon-target"></view>
+      </view>
+      <view class="card-content">
+        <view class="title">我想招揽人才</view>
+        <view class="subtitle">TALENT HUNTER</view>
+      </view>
+      <view class="tag-row">
+        <text class="tag">精准筛选</text>
+        <text class="tag">极速响应</text>
+        <text class="tag">线上直聘</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <view class="divider"></view>
+    <view class="links">
+      <text bindtap="showModal" data-type="privacy">隐私政策</text>
+      <text bindtap="showModal" data-type="terms">服务条款</text>
+      <text bindtap="showModal" data-type="about">关于我们</text>
+    </view>
+  </view>
+
+  <!-- 弹窗 -->
+  <view class="policy-modal" wx:if="{{showModalFlag}}">
+    <view class="modal-mask" bindtap="hideModal"></view>
+    <view class="modal-container">
+      <view class="modal-header">
+        <text class="modal-title">{{modalTitle}}</text>
+        <view class="close-btn" bindtap="hideModal">✕</view>
+      </view>
+      <scroll-view class="modal-content" scroll-y>
+        <view class="policy-content">
+          <text class="policy-text">{{modalContent}}</text>
+        </view>
+      </scroll-view>
+      <view class="modal-footer">
+        <view class="modal-btn" bindtap="hideModal">我知道了</view>
+      </view>
+    </view>
+  </view>
+</view>

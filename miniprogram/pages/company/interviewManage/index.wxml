@@ -1,0 +1,105 @@
+<!-- 企业面试管理页 -->
+<view class="container">
+  <view class="list">
+    <view class="interview-item" wx:for="{{interviews}}" wx:key="_id">
+      <view class="item-header">
+        <text class="candidate-name">{{item.candidateName}}</text>
+        <view class="status status-{{item.status}}">
+          <text class="status-text">
+            {{item.status === 'pending' ? '待确认' : 
+              item.status === 'confirmed' ? '已确认' : 
+              item.status === 'completed' ? '已完成' : 
+              item.status === 'cancelled' ? '已取消' : '未知'}}
+          </text>
+        </view>
+      </view>
+      <view class="job-title">
+        <text class="job-title-text">{{item.jobTitle}}</text>
+      </view>
+      <view class="info-row">
+        <text>📅 面试时间：{{item.interviewTime || '待设置'}}</text>
+      </view>
+      <view class="info-row">
+        <text>📍 面试地点：{{item.location || '待设置'}}</text>
+      </view>
+      <view class="info-row">
+        <text>📱 联系电话：{{item.candidatePhone}}</text>
+      </view>
+      <view class="info-row" wx:if="{{item.notes}}">
+        <text>💬 备注：{{item.notes}}</text>
+      </view>
+      
+      <!-- 待确认状态：显示确认和拒绝按钮 -->
+      <view class="actions" wx:if="{{item.status === 'pending'}}">
+        <button class="action-btn confirm" bindtap="confirmInterview" data-id="{{item._id}}">确认面试</button>
+        <button class="action-btn reject-interview" bindtap="rejectInterview" data-id="{{item._id}}">拒绝面试</button>
+      </view>
+      
+      <!-- 已确认状态：显示通过和未通过按钮 -->
+      <view class="actions" wx:if="{{item.status === 'confirmed' && !item.result}}">
+        <button class="action-btn pass" bindtap="updateResult" data-id="{{item._id}}" data-result="hired">通过</button>
+        <button class="action-btn reject" bindtap="updateResult" data-id="{{item._id}}" data-result="rejected">未通过</button>
+      </view>
+      
+      <!-- 面试结果显示 -->
+      <view class="result" wx:if="{{item.result}}">
+        <view class="result-badge {{item.result === 'hired' ? 'passed-badge' : 'failed-badge'}}">
+          <text class="result-text {{item.result === 'hired' ? 'passed-text' : 'failed-text'}}">
+            {{item.result === 'hired' ? '✔️ 已通过' : '✖️ 未通过'}}
+          </text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty" wx:if="{{!loading && interviews.length === 0}}">
+      <text>暂无面试安排</text>
+    </view>
+  </view>
+  
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+  
+  <!-- 确认面试弹窗 -->
+  <view class="modal" wx:if="{{showConfirmModal}}" catchtap="closeModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">确认面试</text>
+        <text class="modal-close" bindtap="closeModal">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="form-item">
+          <view class="label">面试日期</view>
+          <picker mode="date" value="{{interviewDate}}" bindchange="onDateChange">
+            <view class="picker-input">
+              {{interviewDate || '请选择日期'}}
+            </view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <view class="label">面试时间</view>
+          <picker mode="time" value="{{interviewTimeValue}}" bindchange="onTimeChange">
+            <view class="picker-input">
+              {{interviewTimeValue || '请选择时间'}}
+            </view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <view class="label">面试地点</view>
+          <input class="input" type="text" placeholder="请输入面试地点" value="{{interviewLocation}}" bindinput="onLocationInput" maxlength="100" />
+        </view>
+        
+        <view class="form-item">
+          <view class="label">备注（可选）</view>
+          <textarea class="textarea" placeholder="请输入备注信息" value="{{interviewNotes}}" bindinput="onNotesInput" maxlength="200" />
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="modal-btn confirm" bindtap="submitConfirm">确认</button>
+        <button class="modal-btn cancel" bindtap="closeModal">取消</button>
+      </view>
+    </view>
+  </view>
+</view>

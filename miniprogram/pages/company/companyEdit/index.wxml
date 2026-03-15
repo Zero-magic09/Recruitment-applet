@@ -1,0 +1,171 @@
+<!-- 编辑企业信息页 -->
+<view class="container">
+  <scroll-view scroll-y class="content">
+    <!-- Logo上传 -->
+    <view class="section">
+      <view class="logo-upload" bindtap="uploadLogo">
+        <image class="logo" src="{{companyInfo.logo || '/images/企业头像.png'}}" mode="aspectFill" />
+        <text class="upload-tip">点击上传企业Logo</text>
+      </view>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="section">
+      <view class="section-title">
+        <text class="title-text">基本信息</text>
+      </view>
+      <view class="form-item">
+        <text class="label">企业名称 <text class="required">*</text></text>
+        <input class="input" placeholder="请输入企业全称" value="{{companyInfo.companyName}}" data-field="companyName" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">社会信用代码</text>
+        <input class="input" placeholder="请输入18位社会信用代码" value="{{companyInfo.creditCode}}" data-field="creditCode" bindinput="onInput" maxlength="18" />
+      </view>
+      <view class="form-item">
+        <text class="label">法定代表人 <text class="required">*</text></text>
+        <input class="input" placeholder="请输入法定代表人姓名" value="{{companyInfo.legalPerson}}" data-field="legalPerson" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">注册资本</text>
+        <input class="input" type="digit" placeholder="请输入注册资本(万元)" value="{{companyInfo.registeredCapital}}" data-field="registeredCapital" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">企业规模</text>
+        <picker mode="selector" range="{{scaleOptions}}" value="{{scaleIndex}}" bindchange="onScaleChange">
+          <view class="picker {{companyInfo.scale ? '' : 'placeholder'}}">
+            {{companyInfo.scale || '请选择企业规模'}}
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="label">所属行业 <text class="required">*</text></text>
+        <picker mode="selector" range="{{industryOptions}}" value="{{industryIndex}}" bindchange="onIndustryChange">
+          <view class="picker {{companyInfo.industry ? '' : 'placeholder'}}">
+            {{companyInfo.industry || '请选择所属行业'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 联系方式 -->
+    <view class="section">
+      <view class="section-title">
+        <text class="title-text">联系方式</text>
+      </view>
+      <view class="form-item">
+        <text class="label">企业地址</text>
+        <input class="input" placeholder="请输入企业详细地址" value="{{companyInfo.address}}" data-field="address" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">联系电话 <text class="required">*</text></text>
+        <input class="input" type="number" placeholder="请输入企业联系电话" value="{{companyInfo.contactPhone}}" data-field="contactPhone" bindinput="onInput" maxlength="11" />
+      </view>
+      <view class="form-item">
+        <text class="label">联系邮箱</text>
+        <input class="input" placeholder="请输入企业邮箱" value="{{companyInfo.contactEmail}}" data-field="contactEmail" bindinput="onInput" />
+      </view>
+    </view>
+
+    <!-- 企业简介 -->
+    <view class="section">
+      <view class="section-title">
+        <text class="title-text">企业简介</text>
+      </view>
+      <view class="form-item-vertical">
+        <textarea class="textarea" placeholder="请简要介绍企业的业务范围、发展历程等" value="{{companyInfo.introduction}}" data-field="introduction" bindinput="onInput" maxlength="500" />
+        <text class="counter">{{companyInfo.introduction.length}}/500</text>
+      </view>
+    </view>
+
+    <!-- 福利待遇 -->
+    <view class="section">
+      <view class="section-title">
+        <text class="title-text">福利待遇</text>
+      </view>
+      <view class="benefits-input">
+        <input class="input" placeholder="输入福利标签" value="{{benefitInput}}" bindinput="onBenefitInput" bindconfirm="addBenefit" />
+        <button class="add-btn" bindtap="addBenefit">添加</button>
+      </view>
+      <view class="benefits-list">
+        <view class="benefit-tag" wx:for="{{companyInfo.benefits}}" wx:key="index">
+          <text>{{item}}</text>
+          <text class="remove-btn" bindtap="removeBenefit" data-index="{{index}}">×</text>
+        </view>
+        <view class="empty-tip" wx:if="{{companyInfo.benefits.length === 0}}">
+          <text>暂无福利标签</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 认证信息 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="title-text">认证信息</text>
+        </view>
+        <button class="add-btn-small" bindtap="goToCertification">
+          {{certStatus === 'approved' ? '查看认证' : (certStatus === 'pending' ? '查看进度' : '+ 去认证')}}
+        </button>
+      </view>
+
+      <!-- 已认证 -->
+      <view class="cert-list" wx:if="{{certStatus === 'approved'}}">
+        <view class="cert-card">
+          <view class="cert-badge">
+            <text class="badge-icon">🏆</text>
+            <text class="badge-level" style="color: #4caf50;">已认证</text>
+          </view>
+          <view class="cert-info-box">
+            <text class="cert-category">企业资质认证</text>
+            <text class="cert-score">认证状态：✅ 已通过审核</text>
+          </view>
+          <text class="cert-arrow" bindtap="goToCertification">查看 ></text>
+        </view>
+      </view>
+
+      <!-- 审核中 -->
+      <view class="cert-list" wx:elif="{{certStatus === 'pending'}}">
+        <view class="cert-card pending">
+          <view class="cert-badge">
+            <text class="badge-icon">⏳</text>
+            <text class="badge-level" style="color: #ff9800;">审核中</text>
+          </view>
+          <view class="cert-info-box">
+            <text class="cert-category">企业资质认证</text>
+            <text class="cert-score">认证状态：审核处理中</text>
+          </view>
+          <text class="cert-arrow" bindtap="goToCertification">查看 ></text>
+        </view>
+      </view>
+
+      <!-- 已拒绝 -->
+      <view class="cert-list" wx:elif="{{certStatus === 'rejected'}}">
+        <view class="cert-card rejected">
+          <view class="cert-badge">
+            <text class="badge-icon">❌</text>
+            <text class="badge-level" style="color: #ff4444;">已拒绝</text>
+          </view>
+          <view class="cert-info-box">
+            <text class="cert-category">企业资质认证</text>
+            <text class="cert-score">认证状态：审核未通过</text>
+          </view>
+          <text class="cert-arrow" bindtap="goToCertification">重新认证 ></text>
+        </view>
+      </view>
+
+      <!-- 未认证提示 -->
+      <view class="cert-tip" wx:else>
+        <text>🏆 完成企业资质认证，提升企业可信度，吸引更多优秀人才</text>
+      </view>
+    </view>
+
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <button class="btn-secondary" bindtap="previewCompanyInfo">预览</button>
+    <button class="btn-primary" bindtap="saveCompanyInfo">保存</button>
+  </view>
+</view>

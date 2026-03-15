@@ -1,0 +1,107 @@
+<!-- 技能证书展示页面 -->
+<view class="certificate-page">
+  <view class="certificate-container" wx:if="{{!loading && certificate}}">
+    <!-- 恭喜提示（仅新证书显示） -->
+    <view class="congrats-banner" wx:if="{{isNew}}">
+      <text class="congrats-icon">🎉</text>
+      <view class="congrats-text">
+        <text class="congrats-title">恭喜通过认证！</text>
+        <text class="congrats-desc">您已获得技能证书</text>
+      </view>
+    </view>
+
+    <!-- 证书卡片 -->
+    <view class="certificate-card">
+      <!-- 证书头部 -->
+      <view class="cert-header">
+        <view class="cert-logo">🏆</view>
+        <view class="cert-title-block">
+          <text class="cert-main-title">技能认证证书</text>
+          <text class="cert-subtitle">Skill Certification</text>
+        </view>
+      </view>
+
+      <!-- 证书主体 -->
+      <view class="cert-body">
+        <view class="cert-user-name">{{certificate.userName}}</view>
+        
+        <view class="cert-content">
+          <text class="cert-text">经过严格考核，在</text>
+          <text class="cert-highlight">计算机与信息技术</text>
+          <text class="cert-text">领域表现优秀</text>
+        </view>
+
+        <!-- 等级徽章 -->
+        <view class="level-badge" style="background: {{certificate.levelColor}};">
+          <text class="level-icon">⭐</text>
+          <text class="level-text">{{certificate.level}}认证</text>
+        </view>
+
+        <!-- 成绩信息 -->
+        <view class="score-info">
+          <view class="score-item">
+            <text class="score-label">考试得分</text>
+            <text class="score-value">{{certificate.score}}分</text>
+          </view>
+          <view class="score-divider"></view>
+          <view class="score-item">
+            <text class="score-label">正确率</text>
+            <text class="score-value">{{certificate.accuracy}}%</text>
+          </view>
+        </view>
+
+        <!-- 技能标签 -->
+        <view class="skills-section">
+          <text class="skills-label">认证技能</text>
+          <view class="skills-tags">
+            <text class="skill-tag" wx:for="{{certificate.skills}}" wx:key="index">{{item}}</text>
+          </view>
+        </view>
+
+        <!-- 证书信息 -->
+        <view class="cert-info">
+          <view class="info-row">
+            <text class="info-label">证书编号：</text>
+            <text class="info-value">{{certificate.certNumber}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">颁发日期：</text>
+            <text class="info-value">{{certificate.issueDateStr}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">有效期至：</text>
+            <text class="info-value">{{certificate.validUntilStr}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 证书底部装饰 -->
+      <view class="cert-footer">
+        <view class="cert-seal">
+          <text class="seal-text">官方认证</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="action-btn primary-btn" open-type="share">
+        <text class="btn-icon">📤</text>
+        <text>分享证书</text>
+      </button>
+      <button class="action-btn secondary-btn" bindtap="viewDetails">
+        <text class="btn-icon">📊</text>
+        <text>查看详情</text>
+      </button>
+    </view>
+
+    <view class="bottom-tip">
+      <text>💡 证书可用于简历展示和岗位智能匹配</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

@@ -1,0 +1,128 @@
+<!-- 企业端首页 -->
+<view class="container">
+  <!-- 企业信息卡片 -->
+  <view class="company-card">
+    <!-- 右上角退出按钮 -->
+    <view class="close-btn" bindtap="handleLogout">
+      <text class="close-icon">×</text>
+    </view>
+    <view class="company-left" bindtap="goToCompanyEdit">
+      <view class="logo-wrapper">
+        <image class="logo" src="{{companyInfo.logo || companyInfo.avatar || '/images/企业头像.png'}}" mode="aspectFill" />
+        <view class="online-dot"></view>
+      </view>
+      <view class="company-info">
+        <view class="name-row">
+          <text class="company-name">{{companyInfo.companyName || '企业用户'}}</text>
+          <view class="cert-badge {{companyInfo.certStatus ? '' : 'cert-badge-empty'}}" bindtap="goToCertification">
+            <text class="cert-text">
+              {{companyInfo.certStatus === 'approved' ? '✅ 已认证' : (companyInfo.certStatus === 'pending' ? '⏳ 审核中' : '暂未认证')}}
+            </text>
+          </view>
+        </view>
+        <text class="company-desc">欢迎使用职场速约招聘平台</text>
+        <!-- 数据统计标签 -->
+        <view class="stats-tags">
+          <view class="stat-tag">
+            <text class="tag-icon">📋</text>
+            <text class="tag-text">{{stats.jobCount}}个岗位</text>
+          </view>
+          <view class="stat-tag">
+            <text class="tag-icon">📬</text>
+            <text class="tag-text">{{stats.applicationCount}}份简历</text>
+          </view>
+          <view class="stat-tag">
+            <text class="tag-icon">📅</text>
+            <text class="tag-text">{{stats.interviewCount}}场面试</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作卡片 -->
+  <view class="action-cards">
+    <view class="action-card" bindtap="goToJobPublish">
+      <view class="card-icon card-icon-blue">
+        <text>📝</text>
+      </view>
+      <text class="card-title">发布岗位</text>
+      <text class="card-subtitle">发布新职位</text>
+    </view>
+
+    <view class="action-card" bindtap="goToJobManage">
+      <view class="card-icon card-icon-purple">
+        <text>📋</text>
+      </view>
+      <text class="card-title">岗位管理</text>
+      <text class="card-subtitle">管理职位</text>
+    </view>
+
+    <view class="action-card" bindtap="goToInterviewManage">
+      <view class="card-icon card-icon-pink">
+        <text>📅</text>
+      </view>
+      <text class="card-title">面试管理</text>
+      <text class="card-subtitle">安排面试</text>
+    </view>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索岗位名称" value="{{searchKeyword}}" bindinput="onSearchInput" bindconfirm="onSearch" />
+    <view class="search-btn" bindtap="onSearch">搜索</view>
+    <view wx:if="{{isSearchMode}}" class="clear-btn" bindtap="clearSearch">✕</view>
+  </view>
+
+  <!-- 筛选标签 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">
+      <text>全部</text>
+    </view>
+    <view class="tab {{activeTab === 'active' ? 'active' : ''}}" bindtap="switchTab" data-tab="active">
+      <text>招聘中</text>
+    </view>
+    <view class="tab {{activeTab === 'inactive' ? 'active' : ''}}" bindtap="switchTab" data-tab="inactive">
+      <text>已关闭</text>
+    </view>
+  </view>
+
+  <!-- 搜索结果标题 -->
+  <view class="search-result-header" wx:if="{{isSearchMode}}">
+    <text class="search-title">搜索结果</text>
+    <text class="search-count">共找到 {{filteredJobs.length}} 个相关岗位</text>
+  </view>
+
+  <!-- 岗位列表 -->
+  <view class="job-list">
+    <view class="job-item" wx:for="{{filteredJobs}}" wx:key="_id" bindtap="goToJobDetail" data-id="{{item._id}}">
+      <view class="job-header">
+        <view class="job-title-row">
+          <text class="job-title">{{item.title}}</text>
+          <text class="status-tag status-{{item.status}}">{{item.status === 'active' ? '招聘中' : '已关闭'}}</text>
+        </view>
+        <text class="job-salary">{{item.salaryMin}}-{{item.salaryMax}}K</text>
+      </view>
+      <view class="job-tags">
+        <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+      </view>
+      <view class="job-footer">
+        <view class="job-meta">
+          <text class="meta-item">📍 {{item.city}}</text>
+          <text class="meta-item">📅 {{item.createTimeStr}}</text>
+        </view>
+        <view class="job-stats">
+          <text class="stat-item">📤 {{item.applicationCount || 0}}人投递</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!loading && filteredJobs.length === 0}}">
+      <text>{{isSearchMode ? '没有找到相关岗位' : '暂无岗位'}}</text>
+    </view>
+  </view>
+
+  <!-- 加载提示 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

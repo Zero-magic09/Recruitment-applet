@@ -1,0 +1,43 @@
+<!-- 添加教育经历 -->
+<view class="container">
+  <view class="content">
+    <view class="form-section">
+      <view class="form-item">
+        <text class="label">学校名称 *</text>
+        <input class="input" placeholder="请输入学校名称" value="{{school}}" bindinput="onSchoolInput" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">专业 *</text>
+        <input class="input" placeholder="请输入专业" value="{{major}}" bindinput="onMajorInput" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">学历 *</text>
+        <picker mode="selector" range="{{degreeArray}}" value="{{degreeIndex}}" bindchange="onDegreeChange">
+          <view class="picker">{{degreeArray[degreeIndex]}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">开始时间 *</text>
+        <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+          <view class="picker">{{startDate || '请选择开始时间'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">结束时间 *</text>
+        <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+          <view class="picker">{{endDate || '请选择结束时间'}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <button class="btn-secondary" bindtap="cancel">取消</button>
+    <button class="btn-primary" bindtap="confirm">{{isEdit ? '确认修改' : '确认添加'}}</button>
+  </view>
+</view>

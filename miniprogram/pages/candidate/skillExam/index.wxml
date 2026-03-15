@@ -1,0 +1,124 @@
+<!-- 技能认证考试页面 -->
+<view class="exam-container">
+  <!-- 顶部信息栏 -->
+  <view class="exam-header">
+    <view class="header-left">
+      <view class="exam-title">{{category}} 认证考试</view>
+      <view class="exam-progress">
+        <text class="progress-text">已答 {{answeredCount}}/{{questions.length}}</text>
+      </view>
+    </view>
+    <view class="timer">
+      <text class="timer-icon">⏱️</text>
+      <text class="timer-text">{{utils.formatTime(timeSpent)}}</text>
+    </view>
+  </view>
+
+  <!-- 题目内容 -->
+  <scroll-view class="exam-body" scroll-y wx:if="{{questions.length > 0}}">
+    <view class="question-card">
+      <view class="question-header">
+        <view class="question-number">第 {{currentIndex + 1}} 题</view>
+        <view class="question-meta">
+          <text class="meta-tag score-tag">{{questions[currentIndex].score}}分</text>
+        </view>
+      </view>
+
+      <view class="question-content">
+        <text class="question-text">{{questions[currentIndex].question}}</text>
+      </view>
+
+      <view class="options-list">
+        <block wx:for="{{questions[currentIndex].options}}" wx:key="index">
+          <view 
+            class="option-item {{userAnswers[questions[currentIndex]._id] === index ? 'selected' : ''}}"
+            bindtap="selectAnswer"
+            data-answer="{{index}}"
+          >
+            <view class="option-radio">
+              <text class="radio-label">{{['A', 'B', 'C', 'D'][index]}}</text>
+            </view>
+            <text class="option-text">{{item}}</text>
+          </view>
+        </block>
+      </view>
+
+      <!-- 题目导航按钮 -->
+      <view class="navigation-buttons">
+        <button 
+          class="nav-btn prev-btn" 
+          bindtap="prevQuestion"
+          disabled="{{currentIndex === 0}}"
+        >
+          上一题
+        </button>
+        <button 
+          class="nav-btn next-btn" 
+          bindtap="nextQuestion"
+          disabled="{{currentIndex === questions.length - 1}}"
+        >
+          下一题
+        </button>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="exam-footer">
+    <button class="toggle-nav-btn" bindtap="toggleNavigator">
+      <text class="btn-icon">{{showNavigator ? '▼' : '▲'}}</text>
+      <text>答题卡</text>
+    </button>
+    
+    <button class="submit-btn" bindtap="submitExam" disabled="{{isSubmitting}}">
+      {{isSubmitting ? '提交中...' : '提交答卷'}}
+    </button>
+  </view>
+
+  <!-- 答题卡面板（可折叠） -->
+  <view class="question-navigator {{showNavigator ? 'show' : 'hide'}}">
+    <view class="navigator-header">
+      <text class="navigator-title">答题卡</text>
+      <text class="close-btn" bindtap="toggleNavigator">×</text>
+    </view>
+    <view class="navigator-grid">
+      <block wx:for="{{questions}}" wx:key="_id">
+        <view 
+          class="navigator-item {{currentIndex === index ? 'active' : ''}} {{userAnswers[item._id] !== undefined ? 'answered' : ''}}"
+          bindtap="goToQuestion"
+          data-index="{{index}}"
+        >
+          {{index + 1}}
+        </view>
+      </block>
+    </view>
+    <view class="navigator-legend">
+      <view class="legend-item">
+        <view class="legend-dot answered"></view>
+        <text>已答</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-dot"></view>
+        <text>未答</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-dot active"></view>
+        <text>当前</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<wxs module="utils">
+  var formatTime = function(seconds) {
+    var m = Math.floor(seconds / 60)
+    var s = seconds % 60
+    var mStr = m < 10 ? '0' + m : '' + m
+    var sStr = s < 10 ? '0' + s : '' + s
+    return mStr + ':' + sStr
+  }
+  
+  module.exports = {
+    formatTime: formatTime
+  }
+</wxs>

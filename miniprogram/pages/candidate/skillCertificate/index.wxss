@@ -1,0 +1,357 @@
+/* 技能证书展示页面样式 */
+.certificate-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40rpx 30rpx;
+}
+
+.certificate-container {
+  max-width: 750rpx;
+  margin: 0 auto;
+}
+
+/* 恭喜横幅 */
+.congrats-banner {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.congrats-icon {
+  font-size: 60rpx;
+}
+
+.congrats-text {
+  flex: 1;
+}
+
+.congrats-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.congrats-desc {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 证书卡片 */
+.certificate-card {
+  background: white;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 12rpx 48rpx rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.certificate-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8rpx;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 证书头部 */
+.cert-header {
+  background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+  padding: 50rpx 40rpx 30rpx;
+  text-align: center;
+  border-bottom: 4rpx solid #f0f0f0;
+}
+
+.cert-logo {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.cert-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.cert-main-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 4rpx;
+}
+
+.cert-subtitle {
+  font-size: 24rpx;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+}
+
+/* 证书主体 */
+.cert-body {
+  padding: 50rpx 40rpx;
+}
+
+.cert-user-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.cert-user-name::after {
+  content: '';
+  position: absolute;
+  bottom: -10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, transparent, #667eea, transparent);
+}
+
+.cert-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 40rpx 0;
+  line-height: 2;
+  white-space: nowrap;
+}
+
+.cert-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.cert-highlight {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #667eea;
+  margin: 0 8rpx;
+}
+
+/* 等级徽章 */
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx 32rpx;
+  border-radius: 50rpx;
+  margin: 30rpx auto;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+
+.level-icon {
+  font-size: 32rpx;
+}
+
+.level-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: white;
+}
+
+/* 成绩信息 */
+.score-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40rpx;
+  margin: 40rpx 0;
+  padding: 30rpx;
+  background: #f6f8fb;
+  border-radius: 16rpx;
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.score-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.score-value {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.score-divider {
+  width: 2rpx;
+  height: 60rpx;
+  background: #d9d9d9;
+}
+
+/* 技能标签 */
+.skills-section {
+  margin: 30rpx 0;
+}
+
+.skills-label {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+  text-align: center;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  justify-content: center;
+}
+
+.skill-tag {
+  padding: 8rpx 20rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 24rpx;
+  border-radius: 20rpx;
+}
+
+/* 证书信息 */
+.cert-info {
+  margin-top: 40rpx;
+  padding-top: 30rpx;
+  border-top: 2rpx dashed #e8e8e8;
+}
+
+.info-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16rpx;
+  font-size: 24rpx;
+}
+
+.info-label {
+  color: #999;
+}
+
+.info-value {
+  color: #666;
+  margin-left: 8rpx;
+}
+
+/* 证书底部 */
+.cert-footer {
+  padding: 30rpx;
+  background: #f6f8fb;
+  display: flex;
+  justify-content: center;
+}
+
+.cert-seal {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid #667eea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  transform: rotate(-15deg);
+}
+
+.seal-text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #667eea;
+  writing-mode: vertical-rl;
+  letter-spacing: 4rpx;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  flex: 1;
+  min-width: 200rpx;
+  height: 88rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.primary-btn {
+  background: white;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.secondary-btn {
+  background: white;
+  color: #667eea;
+  border: 2rpx solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-icon {
+  font-size: 32rpx;
+}
+
+/* 底部提示 */
+.bottom-tip {
+  text-align: center;
+  margin-top: 30rpx;
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12rpx;
+  color: white;
+  font-size: 24rpx;
+}
+
+/* 加载中 */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: white;
+  font-size: 28rpx;
+}

@@ -1,0 +1,332 @@
+/* 投递列表页样式 - 优化版 */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ebf5 100%);
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+/* ========== 岗位头部 ========== */
+.job-header {
+  padding: 20rpx 0;
+  margin-bottom: 24rpx;
+}
+
+.total-count {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+/* ========== 列表 ========== */
+.list {
+  width: 100%;
+}
+
+.application-item {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.application-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s;
+}
+
+.application-item:active::before {
+  transform: scaleY(1);
+}
+
+.application-item:active {
+  transform: translateY(-6rpx);
+  box-shadow: 0 12rpx 32rpx rgba(102, 126, 234, 0.25);
+}
+
+/* ========== 项目头部 ========== */
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 4rpx solid #f0f2ff;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.2);
+  flex-shrink: 0;
+}
+
+.name-status-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 1;
+  min-width: 0;
+}
+
+.candidate-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
+}
+
+.status-time-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12rpx;
+  flex-shrink: 0;
+}
+
+/* 状态徽章容器 - 控制背景和布局 */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5rpx 12rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+/* 状态文字 - 控制文字样式 */
+.status-text {
+  font-size: 22rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
+  transform: translateY(-12rpx);
+}
+
+/* 各状态的背景色 */
+.status-badge-submitted {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(102, 126, 234, 0.25) 100%);
+  border: 1rpx solid rgba(102, 126, 234, 0.3);
+}
+
+.status-badge-submitted .status-text {
+  color: #667eea;
+}
+
+.status-badge-viewed {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(33, 150, 243, 0.25) 100%);
+  border: 1rpx solid rgba(33, 150, 243, 0.3);
+}
+
+.status-badge-viewed .status-text {
+  color: #2196f3;
+}
+
+.status-badge-interviewed {
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+  box-shadow: 0 4rpx 12rpx rgba(255, 165, 0, 0.3);
+}
+
+.status-badge-interviewed .status-text {
+  color: #ffffff;
+}
+
+.status-badge-rejected {
+  background: rgba(158, 158, 158, 0.15);
+  border: 1rpx solid rgba(158, 158, 158, 0.3);
+}
+
+.status-badge-rejected .status-text {
+  color: #9e9e9e;
+}
+
+.status-badge-accepted {
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+  box-shadow: 0 4rpx 12rpx rgba(81, 207, 102, 0.3);
+}
+
+.status-badge-accepted .status-text {
+  color: #ffffff;
+}
+
+.status-badge-hired {
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+  box-shadow: 0 4rpx 12rpx rgba(81, 207, 102, 0.3);
+}
+
+.status-badge-hired .status-text {
+  color: #ffffff;
+}
+
+.apply-time {
+  font-size: 24rpx;
+  color: #999;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  top: -17rpx;
+}
+
+/* ========== 详细信息 ========== */
+.candidate-detail {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  border: 1rpx solid rgba(102, 126, 234, 0.1);
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12rpx;
+  gap: 12rpx;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-size: 24rpx;
+  color: #667eea;
+  font-weight: 600;
+  min-width: 160rpx;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.6;
+  flex: 1;
+  word-break: break-all;
+}
+
+/* ========== 操作按钮 ========== */
+.actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  border-radius: 40rpx;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  line-height: 1;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 6rpx 16rpx rgba(102, 126, 234, 0.3);
+}
+
+.action-btn.primary:active {
+  transform: scale(0.96);
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.4);
+}
+
+.action-btn.secondary {
+  background: #ffffff;
+  color: #667eea;
+  border: 2rpx solid #667eea;
+}
+
+.action-btn.secondary:active {
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(0.96);
+}
+
+.btn-icon {
+  font-size: 28rpx;
+  line-height: 1;
+}
+
+/* ========== 空状态 ========== */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+  filter: grayscale(0.3) opacity(0.6);
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: #999;
+  line-height: 1.6;
+}
+
+/* ========== 加载状态 ========== */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+  gap: 16rpx;
+}
+
+.loading-icon {
+  font-size: 60rpx;
+  animation: rotate 2s linear infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

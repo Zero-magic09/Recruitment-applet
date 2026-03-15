@@ -1,0 +1,105 @@
+<!-- 企业信息预览页 -->
+<view class="container" wx:if="{{companyInfo}}">
+  <scroll-view scroll-y class="content">
+    <!-- 企业头部信息 -->
+    <view class="header">
+      <image class="logo" src="{{companyInfo.logo || '/images/企业头像.png'}}" mode="aspectFill" />
+      <view class="info">
+        <text class="name">{{companyInfo.companyName}}</text>
+        <text class="detail">{{companyInfo.industry}} · {{companyInfo.scale}}</text>
+        <text class="contact">📱 {{companyInfo.contactPhone}}</text>
+        <text class="contact">📧 {{companyInfo.contactEmail || '暂未填写'}}</text>
+      </view>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="section">
+      <view class="section-title">基本信息</view>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="label">企业名称：</text>
+          <text class="value">{{companyInfo.companyName || '未填写'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">社会信用代码：</text>
+          <text class="value">{{companyInfo.creditCode || '未填写'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">法定代表人：</text>
+          <text class="value">{{companyInfo.legalPerson || '未填写'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">注册资本：</text>
+          <text class="value">{{companyInfo.registeredCapital || '未填写'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">企业规模：</text>
+          <text class="value">{{companyInfo.scale || '未填写'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">所属行业：</text>
+          <text class="value">{{companyInfo.industry || '未填写'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 联系方式 -->
+    <view class="section">
+      <view class="section-title">联系方式</view>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="label">企业地址：</text>
+          <text class="value">{{companyInfo.address || '未填写'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">联系电话：</text>
+          <text class="value">{{companyInfo.contactPhone || '未填写'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">联系邮箱：</text>
+          <text class="value">{{companyInfo.contactEmail || '未填写'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 企业简介 -->
+    <view class="section">
+      <view class="section-title">企业简介</view>
+      <text class="section-content" wx:if="{{companyInfo.introduction}}">{{companyInfo.introduction}}</text>
+      <text class="empty-tip" wx:else>暂未填写</text>
+    </view>
+
+    <!-- 福利待遇 -->
+    <view class="section">
+      <view class="section-title">福利待遇</view>
+      <view class="benefits" wx:if="{{companyInfo.benefits && companyInfo.benefits.length > 0}}">
+        <text class="benefit-tag" wx:for="{{companyInfo.benefits}}" wx:key="index">{{item}}</text>
+      </view>
+      <text class="empty-tip" wx:else>暂未填写</text>
+    </view>
+
+    <!-- 认证信息 -->
+    <view class="section">
+      <view class="section-title">认证信息</view>
+      <view class="cert-status" wx:if="{{certStatus === 'approved'}}">
+        <view class="cert-badge approved">
+          <text class="badge-icon">✅</text>
+          <text class="badge-text">已通过企业资质认证</text>
+        </view>
+      </view>
+      <view class="cert-status" wx:elif="{{certStatus === 'pending'}}">
+        <view class="cert-badge pending">
+          <text class="badge-icon">⏳</text>
+          <text class="badge-text">认证审核中</text>
+        </view>
+      </view>
+      <view class="cert-status" wx:elif="{{certStatus === 'rejected'}}">
+        <view class="cert-badge rejected">
+          <text class="badge-icon">❌</text>
+          <text class="badge-text">认证未通过</text>
+        </view>
+      </view>
+      <text class="empty-tip" wx:else>暂未认证</text>
+    </view>
+  </scroll-view>
+</view>

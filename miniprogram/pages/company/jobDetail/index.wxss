@@ -1,0 +1,246 @@
+/* 企业端岗位详情页样式 */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f5f5;
+}
+
+.content {
+  flex: 1;
+  width: 690rpx;
+  padding-top: 30rpx;
+  padding-bottom: 40rpx;
+}
+
+.job-header {
+  background: #ffffff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.job-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.job-title {
+  flex: 1;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.video-tag {
+  font-size: 24rpx;
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  white-space: nowrap;
+}
+
+.salary {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.tag {
+  font-size: 24rpx;
+  color: #666;
+  background: #f5f5f5;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+.section {
+  background: #ffffff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+.section-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.company-logo {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid #eee;
+  flex-shrink: 0;
+}
+
+.company-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.company-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.company-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.location-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.address {
+  flex: 1;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.navigate-btn {
+  font-size: 26rpx;
+  color: #4facfe;
+}
+
+.map {
+  width: 100%;
+  height: 400rpx;
+  border-radius: 12rpx;
+}
+
+.benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.benefit-tag {
+  font-size: 24rpx;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 12rpx 20rpx;
+  border-radius: 8rpx;
+}
+
+.bottom-placeholder {
+  height: 40rpx;
+}
+
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.video-container {
+  position: relative;
+  width: 90%;
+  max-width: 750rpx;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.video {
+  width: 100%;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.5);
+  background: #000000;
+}
+
+.close-btn {
+  position: absolute;
+  top: -80rpx;
+  right: 0;
+  width: 64rpx;
+  height: 64rpx;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10rpx);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  color: #ffffff;
+  font-weight: 300;
+  transition: all 0.2s;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.close-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0.95);
+}
+
+.loading {
+  width: 690rpx;
+  text-align: center;
+  padding: 80rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}

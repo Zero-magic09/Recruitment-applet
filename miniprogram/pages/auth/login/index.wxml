@@ -1,0 +1,55 @@
+<!-- 登录页面 -->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="role-icon {{role === 'candidate' ? 'blue' : 'purple'}}">
+      <view class="icon-box">
+        <view wx:if="{{role === 'candidate'}}" class="icon-briefcase"></view>
+        <view wx:else class="icon-target"></view>
+      </view>
+    </view>
+    <text class="title">{{role === 'candidate' ? '个人求职登录' : '企业HR登录'}}</text>
+    <text class="subtitle">{{role === 'candidate' ? '开启您的职业进阶之旅' : '发现优质人才资源'}}</text>
+  </view>
+
+  <!-- 表单卡片 -->
+  <view class="card {{role === 'candidate' ? 'card-blue' : 'card-purple'}}">
+    <view class="input-group">
+      <text class="label">手机号</text>
+      <view class="input-wrap">
+        <view class="input-icon">
+          <view class="icon-phone"></view>
+        </view>
+        <input 
+          type="number" 
+          placeholder="您的登录手机号" 
+          value="{{phone}}" 
+          bindinput="onPhoneInput" 
+          maxlength="11"
+        />
+      </view>
+    </view>
+    <view class="input-group">
+      <text class="label">密码</text>
+      <view class="input-wrap">
+        <view class="input-icon">
+          <view class="icon-lock"></view>
+        </view>
+        <input 
+          password 
+          placeholder="您的登录密码" 
+          value="{{password}}" 
+          bindinput="onPasswordInput"
+        />
+      </view>
+    </view>
+    <view class="forget-pwd {{role === 'candidate' ? 'blue' : 'purple'}}" bindtap="onForgetPwd">忘记密码?</view>
+    <button class="submit-btn {{role === 'candidate' ? 'btn-blue' : 'btn-purple'}}" bindtap="accountLogin">立即登录</button>
+  </view>
+
+  <!-- 底部链接 -->
+  <view class="footer-link">
+    <text class="footer-text">还没有账号? </text>
+    <text class="link-text {{role === 'candidate' ? 'blue' : 'purple'}}" bindtap="goToRegister">{{role === 'candidate' ? '注册求职账号' : '注册企业账号'}}</text>
+  </view>
+</view>

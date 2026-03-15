@@ -1,0 +1,457 @@
+/* 编辑企业信息页样式 - 参考简历编辑页 */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.content {
+  flex: 1;
+  padding-bottom: 120rpx;
+}
+
+/* Logo上传 */
+.section {
+  background: rgba(255, 255, 255, 0.95);
+  margin: 0 30rpx 24rpx;
+  padding: 40rpx 30rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20rpx);
+}
+
+.section:first-child {
+  margin-top: 30rpx;
+}
+
+.logo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+  padding: 20rpx 0;
+}
+
+.logo {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 4rpx solid #667eea;
+  box-shadow: 0 16rpx 48rpx rgba(102, 126, 234, 0.3);
+  transition: all 0.3s;
+  overflow: hidden;
+  object-fit: contain;
+  display: block;
+  background: #f5f7fa;
+}
+
+.logo-upload:active .logo {
+  transform: scale(0.95);
+}
+
+.upload-tip {
+  font-size: 24rpx;
+  color: rgba(102, 126, 234, 0.8);
+  background: rgba(102, 126, 234, 0.1);
+  padding: 8rpx 24rpx;
+  border-radius: 20rpx;
+}
+
+/* 分区标题 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding-left: 20rpx;
+  border-left: 6rpx solid #667eea;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.section-header .section-title {
+  margin-bottom: 0;
+}
+
+.add-btn-small {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border-radius: 16rpx;
+  padding: 12rpx 28rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+  height: auto;
+  line-height: 1;
+}
+
+.add-btn-small::after {
+  border: none;
+}
+
+.title-icon {
+  font-size: 32rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.title-text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+}
+
+/* 表单项 */
+.form-item {
+  display: flex;
+  align-items: center;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.form-item:focus-within {
+  background: #ffffff;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+}
+
+.form-item-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.form-item-vertical:focus-within {
+  background: #ffffff;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+}
+
+.label {
+  width: 180rpx;
+  font-size: 28rpx;
+  color: #666;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.form-item-vertical .label {
+  width: auto;
+  margin-bottom: 16rpx;
+}
+
+.required {
+  color: #ff4444;
+  margin-left: 4rpx;
+}
+
+.input,
+.picker {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  background: transparent;
+}
+
+.picker {
+  line-height: 70rpx;
+}
+
+.picker.placeholder {
+  color: #999;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 160rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.counter {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  align-self: flex-end;
+}
+
+/* 福利待遇 */
+.benefits-input {
+  display: flex;
+  gap: 20rpx;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.benefits-input .input {
+  flex: 1;
+  border: 2rpx solid transparent;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  font-size: 28rpx;
+  background: #f5f7fa;
+  transition: all 0.3s;
+}
+
+.benefits-input .input:focus {
+  border-color: #667eea;
+  background: #ffffff;
+  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 12rpx 32rpx rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+  height: auto;
+  line-height: 1;
+}
+
+.add-btn::after {
+  border: none;
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.benefits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  min-height: 60rpx;
+  margin-bottom: 24rpx;
+}
+
+.benefit-tag {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 14rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  border: 2rpx solid rgba(102, 126, 234, 0.2);
+  transition: all 0.3s;
+}
+
+.benefit-tag:active {
+  transform: scale(0.95);
+  background: rgba(102, 126, 234, 0.15);
+}
+
+.benefit-tag .remove-btn {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #667eea;
+  line-height: 1;
+}
+
+.empty-tip {
+  width: 100%;
+  text-align: center;
+  font-size: 26rpx;
+  color: #999;
+  padding: 20rpx 0;
+}
+
+/* 认证信息 */
+.cert-tip {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border: 2rpx solid rgba(102, 126, 234, 0.2);
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  font-size: 26rpx;
+  color: #667eea;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* 证书列表 */
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.cert-card {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 24rpx;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, rgba(102, 187, 106, 0.05) 100%);
+  border: 2rpx solid rgba(76, 175, 80, 0.2);
+  border-radius: 16rpx;
+  transition: all 0.3s;
+}
+
+.cert-card.pending {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.05) 0%, rgba(255, 167, 38, 0.05) 100%);
+  border: 2rpx solid rgba(255, 152, 0, 0.2);
+}
+
+.cert-card.rejected {
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.05) 0%, rgba(255, 107, 107, 0.05) 100%);
+  border: 2rpx solid rgba(255, 68, 68, 0.2);
+}
+
+.cert-card:active {
+  transform: scale(0.98);
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(102, 187, 106, 0.1) 100%);
+}
+
+.cert-card.pending:active {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 167, 38, 0.1) 100%);
+}
+
+.cert-card.rejected:active {
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+}
+
+.cert-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+  flex-shrink: 0;
+}
+
+.badge-icon {
+  font-size: 48rpx;
+}
+
+.badge-level {
+  font-size: 22rpx;
+  font-weight: bold;
+}
+
+.cert-info-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.cert-category {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.cert-score {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.cert-arrow {
+  color: #667eea;
+  font-size: 24rpx;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* 底部占位 */
+.bottom-placeholder {
+  height: 120rpx;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20rpx 30rpx;
+  box-shadow: 0 -8rpx 32rpx rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20rpx);
+  display: flex;
+  gap: 20rpx;
+  z-index: 100;
+}
+
+.btn-secondary {
+  flex: 1;
+  height: 88rpx;
+  background: #ffffff;
+  color: #667eea;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  border: 2rpx solid #667eea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.2);
+  transition: all 0.3s;
+}
+
+.btn-secondary::after {
+  border: none;
+}
+
+.btn-primary {
+  flex: 2;
+  height: 88rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 32rpx rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+}
+
+.btn-primary::after {
+  border: none;
+}
+
+.btn-secondary:active {
+  transform: scale(0.95);
+  box-shadow: 0 4rpx 16rpx rgba(102, 126, 234, 0.15);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}

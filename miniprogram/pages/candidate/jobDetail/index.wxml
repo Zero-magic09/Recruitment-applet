@@ -1,0 +1,114 @@
+<!-- 岗位详情页 -->
+<view class="container">
+  <scroll-view scroll-y class="content" wx:if="{{job}}">
+    <!-- 岗位基本信息 -->
+    <view class="job-header">
+      <view class="job-title-row">
+        <text class="job-title">{{job.title}}</text>
+        <text class="video-tag" wx:if="{{job.videoUrl}}" bindtap="playVideo">📹 视频介绍</text>
+      </view>
+      <text class="salary">{{job.salaryMin}}-{{job.salaryMax}}K · {{job.experience}} · {{job.education}}</text>
+      
+      <!-- 查看行业薪资按钮 -->
+      <view class="salary-analysis-btn" bindtap="goToSalaryAnalysis">
+        <text class="icon">📊</text>
+        <text class="text">查看{{job.industry || '行业'}}薪资分析</text>
+      </view>
+      
+      <view class="tags">
+        <text class="tag" wx:for="{{job.tags}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 公司信息 -->
+    <view class="section">
+      <view class="company-info">
+        <image class="company-logo" src="{{company.logo || '/images/公司.png'}}" mode="aspectFill" />
+        <view class="company-detail">
+          <text class="company-name">{{job.companyName}}</text>
+          <text class="company-desc">{{company.industry || '互联网'}} · {{company.scale || '100-500人'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 地理位置 -->
+    <view class="section" wx:if="{{job.location}}">
+      <view class="section-title">工作地点</view>
+      <view class="location-info">
+        <text class="address">{{job.location.address || job.city}}</text>
+        <text class="navigate-btn" bindtap="navigateToLocation">📍 导航</text>
+      </view>
+      <map
+        class="map"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        markers="{{markers}}"
+        scale="15"
+        show-location
+      />
+    </view>
+
+    <!-- 职位描述 -->
+    <view class="section">
+      <view class="section-title">职位描述</view>
+      <text class="section-content">{{job.description}}</text>
+    </view>
+
+    <!-- 任职要求 -->
+    <view class="section">
+      <view class="section-title">任职要求</view>
+      <text class="section-content">{{job.requirements}}</text>
+    </view>
+
+    <!-- 福利待遇 -->
+    <view class="section" wx:if="{{job.benefits && job.benefits.length > 0}}">
+      <view class="section-title">福利待遇</view>
+      <view class="benefits">
+        <text class="benefit-tag" wx:for="{{job.benefits}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 公司介绍 -->
+    <view class="section" wx:if="{{company}}">
+      <view class="section-title">公司介绍</view>
+      <text class="section-content">{{company.description || '暂无介绍'}}</text>
+    </view>
+
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar" wx:if="{{job}}">
+    <button class="btn-secondary" bindtap="bookInterview">预约面试</button>
+    <button 
+      class="btn-primary {{applicationStatus === 'hired' ? 'btn-hired' : (hasApplied ? 'btn-applied' : '')}}" 
+      bindtap="applyJob"
+    >
+      {{applicationStatus === 'hired' ? '✅ 已录取' : (hasApplied ? '已投递' : '投递简历')}}
+    </button>
+  </view>
+
+  <!-- 视频播放模态框 -->
+  <view class="video-modal" wx:if="{{showVideoModal}}" bindtap="closeVideo" catchtouchmove="preventTouchMove">
+    <view class="video-container" catchtap="stopPropagation">
+      <video
+        id="companyVideo"
+        class="video"
+        src="{{currentVideoUrl}}"
+        controls
+        autoplay
+        show-center-play-btn
+        show-fullscreen-btn
+        enable-progress-gesture
+        object-fit="contain"
+        poster="{{job.videoPoster || ''}}"
+      />
+      <view class="close-btn" bindtap="closeVideo">✕</view>
+    </view>
+  </view>
+
+  <!-- 加载提示 -->
+  <view class="loading" wx:if="{{!job}}">
+    <text>加载中...</text>
+  </view>
+</view>

@@ -1,0 +1,455 @@
+/* 技能认证考试页面样式 */
+.exam-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* 顶部信息栏 */
+.exam-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  flex: 1;
+}
+
+.exam-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+
+.exam-progress {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.progress-text {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6rpx 16rpx;
+  border-radius: 12rpx;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12rpx 20rpx;
+  border-radius: 12rpx;
+}
+
+.timer-icon {
+  font-size: 32rpx;
+}
+
+.timer-text {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+/* 题目内容区域 */
+.exam-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 30rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.question-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.question-number {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 8rpx 20rpx;
+  border-radius: 12rpx;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-meta {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.meta-tag {
+  padding: 6rpx 14rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-tag {
+  background: #e6f7ff;
+  color: #1890ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-tag {
+  background: #fff7e6;
+  color: #fa8c16;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 8rpx 20rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.difficulty-tag {
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.difficulty-easy {
+  background: #52c41a;
+}
+
+.difficulty-medium {
+  background: #1890ff;
+}
+
+.difficulty-hard {
+  background: #f5222d;
+}
+
+.question-content {
+  margin: 40rpx 0;
+  padding: 30rpx;
+  background: #fafbfc;
+  border-radius: 16rpx;
+  border-left: 4rpx solid #667eea;
+}
+
+.question-text {
+  font-size: 32rpx;
+  line-height: 2;
+  color: #333;
+  white-space: pre-wrap;
+  font-weight: 500;
+}
+
+/* 选项列表 */
+.options-list {
+  margin-top: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 24rpx;
+  margin-bottom: 24rpx;
+  background: #fafafa;
+  border-radius: 16rpx;
+  border: 3rpx solid transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.option-item:active {
+  transform: scale(0.98);
+}
+
+.option-item.selected {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-color: #667eea;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.15);
+}
+
+.option-radio {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  border: 3rpx solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+  background: white;
+  transition: all 0.3s;
+}
+
+.option-item.selected .option-radio {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.radio-label {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #999;
+}
+
+.option-item.selected .radio-label {
+  color: white;
+}
+
+.option-text {
+  flex: 1;
+  font-size: 30rpx;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* 题目导航按钮 */
+.navigation-buttons {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 40rpx;
+}
+
+.nav-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: white;
+  border: 3rpx solid #667eea;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  color: #667eea;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.nav-btn::after {
+  border: none;
+}
+
+.nav-btn:active {
+  background: rgba(102, 126, 234, 0.05);
+  transform: scale(0.98);
+}
+
+.nav-btn[disabled] {
+  opacity: 0.4;
+  border-color: #d9d9d9;
+  color: #999;
+}
+
+/* 底部操作栏 */
+.exam-footer {
+  background: white;
+  padding: 24rpx;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 20rpx;
+}
+
+.toggle-nav-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: white;
+  border: 3rpx solid #667eea;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #667eea;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 0;
+}
+
+.toggle-nav-btn::after {
+  border: none;
+}
+
+.btn-icon {
+  font-size: 24rpx;
+}
+
+.submit-btn {
+  flex: 2;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.submit-btn::after {
+  border: none;
+}
+
+.submit-btn[disabled] {
+  opacity: 0.7;
+}
+
+/* 答题卡面板（可折叠） */
+.question-navigator {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 30rpx;
+  border-radius: 24rpx 24rpx 0 0;
+  box-shadow: 0 -8rpx 24rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.question-navigator.hide {
+  transform: translateY(100%);
+}
+
+.question-navigator.show {
+  transform: translateY(0);
+}
+
+.navigator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.navigator-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 48rpx;
+  color: #999;
+  line-height: 1;
+  padding: 0 12rpx;
+  cursor: pointer;
+}
+
+.navigator-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24rpx;
+  margin: 24rpx 0;
+}
+
+.navigator-item {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #666;
+  border: 3rpx solid transparent;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.navigator-item:active {
+  transform: scale(0.95);
+}
+
+.navigator-item.answered {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.navigator-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  font-weight: bold;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.navigator-legend {
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #f0f0f0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.legend-dot {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 6rpx;
+  background: #fafafa;
+  border: 2rpx solid #e0e0e0;
+}
+
+.legend-dot.answered {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.legend-dot.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+}

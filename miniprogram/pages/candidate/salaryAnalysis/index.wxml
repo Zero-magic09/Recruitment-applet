@@ -1,0 +1,179 @@
+<!-- 薪资分析页面 -->
+<view class="container">
+  <!-- 顶部筛选区域 -->
+  <view class="filter-section">
+    <!-- 标签切换 -->
+    <view class="tabs">
+      <view class="tab {{activeTab === 'industry' ? 'active' : ''}}" bindtap="switchTab" data-tab="industry">
+        <text>行业</text>
+      </view>
+      <view class="tab {{activeTab === 'city' ? 'active' : ''}}" bindtap="switchTab" data-tab="city">
+        <text>城市</text>
+      </view>
+      <view class="tab {{activeTab === 'experience' ? 'active' : ''}}" bindtap="switchTab" data-tab="experience">
+        <text>经验</text>
+      </view>
+    </view>
+
+    <!-- 选择器独立容器 -->
+    <view class="selector-wrapper">
+      <view class="selector-box">
+        <picker
+          mode="selector"
+          range="{{activeTab === 'industry' ? industries : (activeTab === 'city' ? cities : experiences)}}"
+          value="{{activeTab === 'industry' ? selectedIndustry : (activeTab === 'city' ? selectedCity : selectedExperience)}}"
+          bindchange="{{activeTab === 'industry' ? 'onIndustryChange' : (activeTab === 'city' ? 'onCityChange' : 'onExperienceChange')}}"
+        >
+          <view class="selector">
+            <text class="selector-value">
+              {{activeTab === 'industry'
+                ? (selectedIndustry || '互联网')
+                : (activeTab === 'city'
+                  ? (selectedCity || '北京')
+                  : (selectedExperience || '1-3年'))}}
+            </text>
+           
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 薪资分布卡片 -->
+  <view class="salary-card">
+    <view class="card-header">
+      <view class="card-title">
+        <text class="title-text">薪资分布</text>
+        <text class="title-subtitle">单位：K/月 · 更新于今日</text>
+      </view>
+    </view>
+
+    <!-- 分位数卡片 -->
+    <view class="percentile-row">
+      <view class="percentile-box">
+        <text class="percentile-label">P25</text>
+        <text class="percentile-value">{{salaryDistribution.p25}}<text class="unit-small">k</text></text>
+        <text class="percentile-desc">入门水平</text>
+      </view>
+      <view class="percentile-box percentile-highlight">
+        <text class="percentile-label">P50</text>
+        <text class="percentile-value">{{salaryDistribution.p50}}<text class="unit-small">k</text></text>
+        <text class="percentile-desc">市场中位</text>
+      </view>
+      <view class="percentile-box">
+        <text class="percentile-label">P75</text>
+        <text class="percentile-value">{{salaryDistribution.p75}}<text class="unit-small">k</text></text>
+        <text class="percentile-desc">资深水平</text>
+      </view>
+    </view>
+
+    <!-- 最低/平均/最高 -->
+    <view class="stats-row">
+      <view class="stat-item">
+        <text class="stat-label">最低</text>
+        <text class="stat-value">{{salaryDistribution.min}}k</text>
+      </view>
+      <view class="stat-item stat-primary">
+        <text class="stat-pill">
+          平均 {{salaryDistribution.avg}}k
+        </text>
+      </view>
+      <view class="stat-item stat-right">
+        <text class="stat-label">最高</text>
+        <text class="stat-value">{{salaryDistribution.max}}k</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 市场对比 -->
+  <view class="market-section">
+    <view class="market-header">
+      <text class="market-title">市场对比</text>
+    </view>
+
+    <view class="market-card-row">
+      <view class="market-card" wx:if="{{comparison.citySalary > 0}}">
+        <view class="market-card-top">
+          <view class="market-icon-box icon-blue">
+            <text class="market-icon">📊</text>
+          </view>
+          <view class="market-text-group">
+            <text class="market-label">同城平均薪资</text>
+            <view class="market-value-row">
+              <text class="market-value">{{comparison.citySalary}}k</text>
+              <text class="market-unit">/月</text>
+            </view>
+          </view>
+        </view>
+        <view class="market-card-bottom">
+          <view class="trend-tag trend-up">
+            <text class="trend-icon">↗</text>
+            <text class="trend-text">32.0% 高于</text>
+          </view>
+          <text class="trend-desc">对比当前</text>
+        </view>
+      </view>
+
+      <view class="market-card" wx:if="{{comparison.industrySalary > 0}}">
+        <view class="market-card-top">
+          <view class="market-icon-box icon-purple">
+            <text class="market-icon">🏢</text>
+          </view>
+          <view class="market-text-group">
+            <text class="market-label">同行业平均薪资</text>
+            <view class="market-value-row">
+              <text class="market-value">{{comparison.industrySalary}}k</text>
+              <text class="market-unit">/月</text>
+            </view>
+          </view>
+        </view>
+        <view class="market-card-bottom">
+          <view class="trend-tag trend-up">
+            <text class="trend-icon">↗</text>
+            <text class="trend-text">10.0% 高于</text>
+          </view>
+          <text class="trend-desc">对比当前</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 详细数据分布 -->
+  <view class="detail-distribution" wx:if="{{chartData.length > 0}}">
+    <view class="detail-header">
+      <view class="detail-line"></view>
+      <text class="detail-title">详细数据分布</text>
+    </view>
+
+    <view class="detail-list">
+      <view class="detail-item" wx:for="{{chartData}}" wx:key="label">
+        <view class="detail-left">
+          <text class="detail-number">{{index + 1}}</text>
+          <text class="detail-label">{{item.label}}</text>
+        </view>
+        <view class="detail-right">
+          <text class="detail-value">{{item.value}}k</text>
+          <text class="detail-count">{{item.count}} 个岗位</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据说明 -->
+  <view class="data-info">
+    <view class="info-header">
+      <text class="info-icon">❓</text>
+      <text class="info-title">数据说明</text>
+    </view>
+    <view class="info-content">
+      <text class="info-item">P25 (25%分位数)：市场上25%的岗位薪资低于此值，通常代表初级水平。</text>
+      <text class="info-item">P50 (中位数)：市场上50%的岗位薪资低于此值，代表市场主流水平。</text>
+      <text class="info-item">P75 (75%分位数)：市场上75%的岗位薪资低于此值，通常代表资深或专家水平。</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

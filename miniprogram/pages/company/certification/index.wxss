@@ -1,0 +1,350 @@
+/* 企业认证页面样式 */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8f9fe 0%, #ffffff 100%);
+  padding: 30rpx;
+  padding-bottom: 100rpx;
+}
+
+/* 认证状态卡片 */
+.status-card {
+  background: linear-gradient(135deg, #8b7eea 0%, #9f8def 100%);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(139, 126, 234, 0.2);
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.status-icon {
+  font-size: 48rpx;
+  line-height: 1;
+}
+
+.status-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.status-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.status-desc {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+}
+
+/* 表单区域 */
+.form-section {
+  width: 610rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.title-icon {
+  font-size: 32rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.title-text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+}
+
+/* 表单项 */
+.form-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.form-item-vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.item-label {
+  width: 260rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.label-text {
+  font-size: 28rpx;
+  color: #333;
+  white-space: nowrap;
+}
+
+.label-required {
+  font-size: 28rpx;
+  color: #ff4444;
+}
+
+.item-input,
+.item-picker {
+  flex: 1;
+  height: 70rpx;
+  padding: 0 20rpx;
+  background: #f8f9fe;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.item-input[disabled],
+.item-picker[disabled] {
+  opacity: 0.6;
+  background: #f0f0f0;
+}
+
+.picker-value {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.picker-value.placeholder {
+  color: #999;
+}
+
+.item-textarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  background: #f8f9fe;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+  margin-top: 16rpx;
+  box-sizing: border-box;
+}
+
+.item-textarea[disabled] {
+  opacity: 0.6;
+  background: #f0f0f0;
+}
+
+.textarea-counter {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+}
+
+/* 上传提示 */
+.upload-tip {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 16rpx 20rpx;
+  background: #fff8e1;
+  border-radius: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.tip-icon {
+  font-size: 28rpx;
+  line-height: 1;
+}
+
+.tip-text {
+  flex: 1;
+  font-size: 24rpx;
+  color: #f57c00;
+  line-height: 1.4;
+}
+
+/* 营业执照上传 */
+.license-upload {
+  margin-top: 20rpx;
+}
+
+.upload-box {
+  width: 100%;
+  height: 400rpx;
+  border: 2rpx dashed #ddd;
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  background: #fafafa;
+  transition: all 0.3s;
+}
+
+.upload-box:active {
+  background: #f0f0f0;
+  border-color: #fa709a;
+}
+
+.upload-icon {
+  font-size: 80rpx;
+  line-height: 1;
+}
+
+.upload-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.license-preview {
+  position: relative;
+  width: 100%;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.license-image {
+  width: 100%;
+  height: 400rpx;
+  background: #f0f0f0;
+}
+
+.preview-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10rpx);
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6rpx;
+  padding: 20rpx;
+}
+
+.btn-icon {
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.btn-text {
+  font-size: 24rpx;
+  color: #ffffff;
+}
+
+/* 提交区域 */
+.submit-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.btn-group {
+  display: flex;
+  gap: 20rpx;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 32rpx rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+}
+
+.submit-btn::after {
+  border: none;
+}
+
+.submit-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.submit-btn-approved {
+  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%) !important;
+  color: #ffffff !important;
+  opacity: 1;
+  flex: 1;
+}
+
+.reauth-btn {
+  flex: 1;
+  height: 88rpx;
+  background: linear-gradient(135deg, #ff9800 0%, #ffa726 100%);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 16rpx;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reauth-btn::after {
+  border: none;
+}
+
+.reauth-btn:active {
+  opacity: 0.8;
+}
+
+.submit-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  margin-top: 12rpx;
+}
+
+.submit-tip .tip-icon {
+  font-size: 24rpx;
+}
+
+.submit-tip .tip-text {
+  font-size: 22rpx;
+  color: #999;
+}

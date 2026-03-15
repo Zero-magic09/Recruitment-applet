@@ -1,0 +1,41 @@
+<!-- 添加工作经历 -->
+<view class="container">
+  <view class="content">
+    <view class="form-section">
+      <view class="form-item">
+        <text class="label">公司名称 *</text>
+        <input class="input" placeholder="请输入公司名称" value="{{company}}" bindinput="onCompanyInput" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">职位 *</text>
+        <input class="input" placeholder="请输入职位" value="{{position}}" bindinput="onPositionInput" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">开始时间 *</text>
+        <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+          <view class="picker">{{startDate || '请选择开始时间'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">结束时间 *</text>
+        <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+          <view class="picker">{{endDate || '请选择结束时间'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item-full">
+        <text class="label">工作描述</text>
+        <textarea class="textarea" placeholder="请输入工作内容、业绩等" value="{{description}}" bindinput="onDescriptionInput" maxlength="500" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <button class="btn-secondary" bindtap="cancel">取消</button>
+    <button class="btn-primary" bindtap="confirm">{{isEdit ? '确认修改' : '确认添加'}}</button>
+  </view>
+</view>

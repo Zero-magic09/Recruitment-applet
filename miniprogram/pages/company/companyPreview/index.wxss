@@ -1,0 +1,168 @@
+/* 企业信息预览页样式 */
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.content {
+  padding: 30rpx;
+}
+
+/* 头部信息 */
+.header {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 16rpx;
+  padding: 40rpx;
+  display: flex;
+  gap: 30rpx;
+  margin-bottom: 20rpx;
+  width: 694rpx;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  object-fit: contain;
+  display: block;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.detail {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 区块样式 */
+.section {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  width: 690rpx;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+.section-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* 信息列表 */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.info-item {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.label {
+  color: #999;
+}
+
+.value {
+  color: #333;
+}
+
+/* 福利标签 */
+.benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.benefit-tag {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 12rpx 24rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+}
+
+/* 认证状态 */
+.cert-status {
+  display: flex;
+  justify-content: center;
+}
+
+.cert-badge {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 20rpx 40rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+
+.cert-badge.approved {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.1));
+  color: #4caf50;
+}
+
+.cert-badge.pending {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 183, 77, 0.1));
+  color: #ff9800;
+}
+
+.cert-badge.rejected {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(239, 83, 80, 0.1));
+  color: #f44336;
+}
+
+.badge-icon {
+  font-size: 32rpx;
+}
+
+.badge-text {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 空状态提示 */
+.empty-tip {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+  padding: 40rpx 0;
+  display: block;
+}

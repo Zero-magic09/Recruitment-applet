@@ -1,0 +1,95 @@
+<!-- 简历预览页 -->
+<view class="container" wx:if="{{resume}}">
+  <scroll-view scroll-y class="content">
+    <!-- 个人信息 -->
+    <view class="header">
+      <image class="avatar" src="{{resume.avatar || '/images/用户.png'}}" mode="aspectFill" />
+      <view class="info">
+        <text class="name">{{resume.name}}</text>
+        <text class="detail">{{resume.gender}} · {{resume.age}}岁 · {{resume.education}}</text>
+        <text class="contact">📱 {{resume.phone}}</text>
+        <text class="contact">📧 {{resume.email || '暂未填写'}}</text>
+      </view>
+    </view>
+
+    <!-- 求职意向 -->
+    <view class="section">
+      <view class="section-title">求职意向</view>
+      <view class="intention">
+        <text class="item">期望岗位：{{resume.expectedPosition || '未填写'}}</text>
+        <text class="item">期望城市：{{resume.expectedCity || '未填写'}}</text>
+        <text class="item">期望薪资：{{resume.expectedSalaryMin}}-{{resume.expectedSalaryMax}}K/月</text>
+      </view>
+    </view>
+
+    <!-- 技能标签 -->
+    <view class="section">
+      <view class="section-title">技能标签</view>
+      <view class="skills" wx:if="{{resume.skills && resume.skills.length > 0}}">
+        <text class="skill-tag" wx:for="{{resume.skills}}" wx:key="index">{{item}}</text>
+      </view>
+      <text class="empty-tip" wx:else>暂未填写</text>
+    </view>
+
+    <!-- 技能证书 -->
+    <view class="section">
+      <view class="section-title">技能证书</view>
+      <view class="certificates-list" wx:if="{{certificates.length > 0}}">
+        <view class="certificate-item" wx:for="{{certificates}}" wx:key="_id" bindtap="viewCertificate" data-id="{{item._id}}">
+          <view class="cert-icon" style="background: {{item.levelColor}}">🏆</view>
+          <view class="cert-info">
+            <view class="cert-title">{{item.category}} {{item.level}}认证</view>
+            <view class="cert-meta">
+              <text class="cert-score">得分: {{item.score}}分</text>
+              <text class="cert-date">颁发于 {{item.issueDateStr}}</text>
+            </view>
+            <view class="cert-skills">
+              <text class="mini-tag" wx:for="{{item.skills}}" wx:for-item="skill" wx:key="index">{{skill}}</text>
+            </view>
+          </view>
+          <text class="cert-arrow">></text>
+        </view>
+      </view>
+      <text class="empty-tip" wx:else>暂无技能证书</text>
+    </view>
+
+    <!-- 工作经历 -->
+    <view class="section">
+      <view class="section-title">工作经历</view>
+      <view class="timeline" wx:if="{{resume.workExperiences && resume.workExperiences.length > 0}}">
+        <view class="timeline-item" wx:for="{{resume.workExperiences}}" wx:key="index">
+          <view class="timeline-dot"></view>
+          <view class="timeline-content">
+            <text class="timeline-title">{{item.company}} - {{item.position}}</text>
+            <text class="timeline-time">{{item.startDate}} 至 {{item.endDate}}</text>
+            <text class="timeline-desc">{{item.description}}</text>
+          </view>
+        </view>
+      </view>
+      <text class="empty-tip" wx:else>暂未填写</text>
+    </view>
+
+    <!-- 教育经历 -->
+    <view class="section">
+      <view class="section-title">教育经历</view>
+      <view class="timeline" wx:if="{{resume.educationExperiences && resume.educationExperiences.length > 0}}">
+        <view class="timeline-item" wx:for="{{resume.educationExperiences}}" wx:key="index">
+          <view class="timeline-dot"></view>
+          <view class="timeline-content">
+            <text class="timeline-title">{{item.school}} - {{item.major}}</text>
+            <text class="timeline-time">{{item.startDate}} 至 {{item.endDate}}</text>
+            <text class="timeline-desc">{{item.degree}}</text>
+          </view>
+        </view>
+      </view>
+      <text class="empty-tip" wx:else>暂未填写</text>
+    </view>
+
+    <!-- 自我评价 -->
+    <view class="section">
+      <view class="section-title">自我评价</view>
+      <text class="section-content" wx:if="{{resume.selfIntroduction}}">{{resume.selfIntroduction}}</text>
+      <text class="empty-tip" wx:else>暂未填写</text>
+    </view>
+  </scroll-view>
+</view>

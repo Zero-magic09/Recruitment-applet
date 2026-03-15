@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/auth/login/index",
+    "pages/auth/register/index",
+    "pages/candidate/home/index",
+    "pages/candidate/jobDetail/index",
+    "pages/candidate/resume/edit/index",
+    "pages/candidate/resume/addWork/index",
+    "pages/candidate/resume/addEducation/index",
+    "pages/candidate/resume/preview/index",
+    "pages/candidate/applications/index",
+    "pages/candidate/interviews/index",
+    "pages/candidate/skillExam/index",
+    "pages/candidate/skillCertificate/index",
+    "pages/candidate/salaryAnalysis/index",
+    "pages/company/home/index",
+    "pages/company/jobDetail/index",
+    "pages/company/companyEdit/index",
+    "pages/company/companyPreview/index",
+    "pages/company/certification/index",
+    "pages/company/jobPublish/index",
+    "pages/company/jobManage/index",
+    "pages/company/applicationList/index",
+    "pages/company/interviewManage/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "职场速约",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于推荐附近岗位"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

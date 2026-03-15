@@ -1,0 +1,157 @@
+<!-- 注册页面 -->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="role-icon {{role === 'candidate' ? 'blue' : 'purple'}}">
+      <view class="icon-box">
+        <view wx:if="{{role === 'candidate'}}" class="icon-briefcase"></view>
+        <view wx:else class="icon-target"></view>
+      </view>
+    </view>
+    <text class="title">{{role === 'candidate' ? '个人求职注册' : '企业HR注册'}}</text>
+    <text class="subtitle">{{role === 'candidate' ? '加入 100w+ 职场精英' : '发现优质人才资源'}}</text>
+  </view>
+
+  <!-- 表单卡片 -->
+  <view class="card {{role === 'candidate' ? 'card-blue' : 'card-purple'}}">
+    <view class="input-group">
+      <text class="label">姓名</text>
+      <view class="input-wrap">
+        <view class="input-icon">
+          <view class="icon-user"></view>
+        </view>
+        <input 
+          type="text" 
+          placeholder="请输入姓名" 
+          value="{{name}}" 
+          bindinput="onNameInput"
+        />
+      </view>
+    </view>
+    <view class="input-group">
+      <text class="label">常用手机号</text>
+      <view class="input-wrap">
+        <view class="input-icon">
+          <view class="icon-phone"></view>
+        </view>
+        <input 
+          type="number" 
+          placeholder="用于登录和联系" 
+          value="{{phone}}" 
+          bindinput="onPhoneInput" 
+          maxlength="11"
+        />
+      </view>
+    </view>
+    <view class="input-group">
+      <text class="label">设置登录密码</text>
+      <view class="input-wrap">
+        <view class="input-icon">
+          <view class="icon-lock"></view>
+        </view>
+        <input 
+          password 
+          placeholder="不少于6位字符" 
+          value="{{password}}" 
+          bindinput="onPasswordInput"
+        />
+      </view>
+    </view>
+    <view class="input-group">
+      <text class="label">确认密码</text>
+      <view class="input-wrap">
+        <view class="input-icon">
+          <view class="icon-lock"></view>
+        </view>
+        <input 
+          password 
+          placeholder="请再次输入密码" 
+          value="{{confirmPassword}}" 
+          bindinput="onConfirmPasswordInput"
+        />
+      </view>
+    </view>
+    <button class="submit-btn {{role === 'candidate' ? 'btn-blue' : 'btn-purple'}}" bindtap="register">{{role === 'candidate' ? '完成求职注册' : '完成企业注册'}}</button>
+  </view>
+
+  <!-- 底部链接 -->
+  <view class="footer-link">
+    <text class="footer-text">注册即表示同意 </text>
+    <text class="link-text {{role === 'candidate' ? 'blue' : 'purple'}}" bindtap="showAgreement">{{role === 'candidate' ? '求职者服务协议' : '企业服务协议'}}</text>
+    <text class="footer-text"> 和 </text>
+    <text class="link-text {{role === 'candidate' ? 'blue' : 'purple'}}" bindtap="showPrivacy">隐私政策</text>
+  </view>
+</view>
+
+<!-- 用户协议弹窗 -->
+<view class="policy-modal" wx:if="{{showAgreementModal}}">
+  <view class="modal-mask" bindtap="closeModal"></view>
+  <view class="modal-container">
+    <view class="modal-header">
+      <text class="modal-title">用户协议</text>
+      <view class="close-btn" bindtap="closeModal">✕</view>
+    </view>
+    <scroll-view class="modal-content" scroll-y>
+      <view class="policy-content">
+        <view class="section">
+          <text class="section-title">一、服务说明</text>
+          <text class="section-text">本平台为求职者和企业提供专业找工作和招聘服务，你需要注册账号并提供真实信息方可使用。</text>
+        </view>
+        <view class="section">
+          <text class="section-title">二、用户义务</text>
+          <text class="section-text">• 注册信息需真实、准确，不得冒用他人身份；</text>
+          <text class="section-text">• 不得发布违法、侵权、虚假的求职/招聘信息；</text>
+          <text class="section-text">• 妥善保管账号，因个人原因导致账号被盗用的，平台不承担责任。</text>
+        </view>
+        <view class="section">
+          <text class="section-title">三、服务限制</text>
+          <text class="section-text">平台有权对违规账号采取限制、封禁等措施；若你违反协议，平台可终止服务并不承担赔偿责任。</text>
+        </view>
+        <view class="section">
+          <text class="section-title">四、知识产权</text>
+          <text class="section-text">平台内容（如职位信息、界面设计）归平台所有，未经授权不得转载、商用。</text>
+        </view>
+        <view class="section">
+          <text class="section-title">五、其他</text>
+          <text class="section-text">平台有权修改本协议，修改后将通过平台公告通知；若你继续使用服务，视为同意修改后的协议。</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 隐私政策弹窗 -->
+<view class="policy-modal" wx:if="{{showPrivacyModal}}">
+  <view class="modal-mask" bindtap="closeModal"></view>
+  <view class="modal-container">
+    <view class="modal-header">
+      <text class="modal-title">隐私政策</text>
+      <view class="close-btn" bindtap="closeModal">✕</view>
+    </view>
+    <scroll-view class="modal-content" scroll-y>
+      <view class="policy-content">
+        <view class="section">
+          <text class="section-title">一、收集的信息</text>
+          <text class="section-text">• 注册信息：姓名、手机号等（用于账号验证、求职沟通）；</text>
+          <text class="section-text">• 求职/企业信息：简历/企业信息（用于匹配职位）；</text>
+          <text class="section-text">• 设备信息：如设备型号、IP地址（用于保障服务安全）。</text>
+        </view>
+        <view class="section">
+          <text class="section-title">二、信息使用</text>
+          <text class="section-text">• 用于提供求职/招聘服务；</text>
+          <text class="section-text">• 用于优化平台功能、推送适配的职位信息；</text>
+          <text class="section-text">• 依法配合监管部门的信息查询需求。</text>
+        </view>
+        <view class="section">
+          <text class="section-title">三、信息保护</text>
+          <text class="section-text">平台采用加密等技术保护你的信息安全，不会向无关第三方泄露你的信息（经你同意或法律要求的除外）。</text>
+        </view>
+        <view class="section">
+          <text class="section-title">四、你的权利</text>
+          <text class="section-text">• 你可随时修改、删除账号中的个人信息；</text>
+          <text class="section-text">• 若注销账号，平台将停止使用你的信息并按规定删除。</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

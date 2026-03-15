@@ -1,0 +1,228 @@
+<!-- 企业认证页面 -->
+<view class="container">
+  <!-- 企业资料表单 -->
+  <view class="form-section">
+    <view class="section-title">
+      <text class="title-icon">🏢</text>
+      <text class="title-text">企业基本资料</text>
+    </view>
+
+    <!-- 企业名称 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">企业名称</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="item-input" 
+        placeholder="请输入企业全称"
+        value="{{formData.companyName}}"
+        bindinput="onCompanyNameInput"
+        disabled="{{certStatus === 'approved'}}"
+      />
+    </view>
+
+    <!-- 社会信用代码 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">社会信用代码</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="item-input" 
+        placeholder="请输入18位社会信用代码"
+        value="{{formData.creditCode}}"
+        bindinput="onCreditCodeInput"
+        maxlength="18"
+        disabled="{{certStatus === 'approved'}}"
+      />
+    </view>
+
+    <!-- 法定代表人 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">法定代表人</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="item-input" 
+        placeholder="请输入法定代表人姓名"
+        value="{{formData.legalPerson}}"
+        bindinput="onLegalPersonInput"
+        disabled="{{certStatus === 'approved'}}"
+      />
+    </view>
+
+    <!-- 注册资本 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">注册资本</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="item-input" 
+        placeholder="请输入注册资本(万元)"
+        value="{{formData.registeredCapital}}"
+        bindinput="onRegisteredCapitalInput"
+        type="digit"
+        disabled="{{certStatus === 'approved'}}"
+      />
+    </view>
+
+    <!-- 企业规模 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">企业规模</text>
+        <text class="label-required">*</text>
+      </view>
+      <picker 
+        class="item-picker" 
+        mode="selector" 
+        range="{{scaleOptions}}"
+        value="{{scaleIndex}}"
+        bindchange="onScaleChange"
+        disabled="{{certStatus === 'approved'}}"
+      >
+        <view class="picker-value {{formData.scale ? '' : 'placeholder'}}">
+          {{formData.scale || '请选择企业规模'}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 所属行业 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">所属行业</text>
+        <text class="label-required">*</text>
+      </view>
+      <picker 
+        class="item-picker" 
+        mode="selector" 
+        range="{{industryOptions}}"
+        value="{{industryIndex}}"
+        bindchange="onIndustryChange"
+        disabled="{{certStatus === 'approved'}}"
+      >
+        <view class="picker-value {{formData.industry ? '' : 'placeholder'}}">
+          {{formData.industry || '请选择所属行业'}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 企业地址 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">企业地址</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="item-input" 
+        placeholder="请输入企业详细地址"
+        value="{{formData.address}}"
+        bindinput="onAddressInput"
+        disabled="{{certStatus === 'approved'}}"
+      />
+    </view>
+
+    <!-- 联系电话 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">联系电话</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="item-input" 
+        placeholder="请输入企业联系电话"
+        value="{{formData.contactPhone}}"
+        bindinput="onContactPhoneInput"
+        type="number"
+        maxlength="11"
+        disabled="{{certStatus === 'approved'}}"
+      />
+    </view>
+
+    <!-- 企业邮箱 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-text">企业邮箱</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="item-input" 
+        placeholder="请输入企业邮箱"
+        value="{{formData.contactEmail}}"
+        bindinput="onContactEmailInput"
+        disabled="{{certStatus === 'approved'}}"
+      />
+    </view>
+
+    <!-- 企业简介 -->
+    <view class="form-item form-item-vertical">
+      <view class="item-label">
+        <text class="label-text">企业简介</text>
+        <text class="label-required">*</text>
+      </view>
+      <textarea 
+        class="item-textarea" 
+        placeholder="请简要介绍企业业务范围、发展历程等"
+        value="{{formData.introduction}}"
+        bindinput="onIntroductionInput"
+        maxlength="500"
+        disabled="{{certStatus === 'approved'}}"
+      />
+      <view class="textarea-counter">{{formData.introduction.length}}/500</view>
+    </view>
+  </view>
+
+  <!-- 营业执照上传 -->
+  <view class="form-section">
+    <view class="section-title">
+      <text class="title-icon">📄</text>
+      <text class="title-text">营业执照</text>
+    </view>
+
+    <view class="upload-tip">
+      <text class="tip-icon">💡</text>
+      <text class="tip-text">请上传清晰的营业执照照片,确保信息完整可见</text>
+    </view>
+
+    <view class="license-upload">
+      <view class="upload-box" wx:if="{{!formData.licenseImage}}" bindtap="uploadLicense">
+        <text class="upload-icon">📷</text>
+        <text class="upload-text">点击上传营业执照</text>
+      </view>
+      <view class="license-preview" wx:else>
+        <image class="license-image" src="{{formData.licenseImage}}" mode="aspectFit" />
+        <view class="preview-actions" wx:if="{{certStatus !== 'approved'}}">
+          <view class="action-btn" bindtap="previewLicense">
+            <text class="btn-icon">👁️</text>
+            <text class="btn-text">预览</text>
+          </view>
+          <view class="action-btn" bindtap="reuploadLicense">
+            <text class="btn-icon">🔄</text>
+            <text class="btn-text">重新上传</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <view class="btn-group" wx:if="{{certStatus === 'approved'}}">
+      <button class="submit-btn submit-btn-approved" disabled>
+        ✅ 已认证
+      </button>
+      <button class="reauth-btn" bindtap="handleReauth">
+        🔄 重新认证
+      </button>
+    </view>
+    <button 
+      wx:else
+      class="submit-btn" 
+      bindtap="submitCertification"
+    >
+      提交认证
+    </button>
+  </view>
+</view>

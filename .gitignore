@@ -1,0 +1,24 @@
+# WeChat Mini Program
+project.private.config.json
+node_modules/
+dist/
+unpackage/
+
+# Environment
+miniprogram/envList.js
+uploadCloudFunction.sh
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backend/Temporary
+.gemini/
+.agents/
+brain/
+*.tmp

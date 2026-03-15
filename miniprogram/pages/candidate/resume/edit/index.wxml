@@ -1,0 +1,171 @@
+<!-- 简历编辑页 -->
+<view class="container">
+  <scroll-view scroll-y class="content">
+    <!-- 头像 -->
+    <view class="section">
+      <view class="avatar-upload" bindtap="uploadAvatar">
+        <image class="avatar" src="{{resume.avatar || '/images/用户.png'}}" mode="aspectFill" />
+        <text class="upload-tip">点击上传头像</text>
+      </view>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="section">
+      <view class="section-title">基本信息</view>
+      <view class="form-item">
+        <text class="label">姓名 <text class="required">*</text></text>
+        <input class="input" placeholder="请输入姓名" value="{{resume.name}}" data-field="name" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">性别</text>
+        <picker mode="selector" range="{{genderArray}}" value="{{genderArray.indexOf(resume.gender)}}" bindchange="onGenderChange">
+          <view class="picker">{{resume.gender}}</view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="label">年龄</text>
+        <input class="input" type="number" placeholder="请输入年龄" value="{{resume.age}}" data-field="age" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">手机号 <text class="required">*</text></text>
+        <input class="input" type="number" placeholder="请输入手机号" value="{{resume.phone}}" data-field="phone" bindinput="onInput" maxlength="11" />
+      </view>
+      <view class="form-item">
+        <text class="label">邮箱</text>
+        <input class="input" placeholder="请输入邮箱" value="{{resume.email}}" data-field="email" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">学历 <text class="required">*</text></text>
+        <picker mode="selector" range="{{educationArray}}" value="{{educationArray.indexOf(resume.education)}}" bindchange="onEducationChange">
+          <view class="picker">{{resume.education}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 求职意向 -->
+    <view class="section">
+      <view class="section-title">求职意向</view>
+      <view class="form-item">
+        <text class="label">期望岗位</text>
+        <input class="input" placeholder="如:前端开发工程师" value="{{resume.expectedPosition}}" data-field="expectedPosition" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">期望城市</text>
+        <input class="input" placeholder="如:北京" value="{{resume.expectedCity}}" data-field="expectedCity" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">期望薪资</text>
+        <view class="salary-range">
+          <input class="input-small" type="number" placeholder="最低(K/月)" value="{{resume.expectedSalaryMin}}" data-field="expectedSalaryMin" bindinput="onInput" />
+          <text class="separator">-</text>
+          <input class="input-small" type="number" placeholder="最高(K/月)" value="{{resume.expectedSalaryMax}}" data-field="expectedSalaryMax" bindinput="onInput" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 技能标签 -->
+    <view class="section">
+      <view class="section-title">技能标签</view>
+      <view class="skills-input">
+        <input class="input" placeholder="输入技能标签" value="{{skillInput}}" bindinput="onSkillInput" bindconfirm="addSkill" />
+        <button class="add-btn" bindtap="addSkill">添加</button>
+      </view>
+      <view class="skills-list">
+        <view class="skill-tag" wx:for="{{resume.skills}}" wx:key="index">
+          <text>{{item}}</text>
+          <text class="remove-btn" bindtap="removeSkill" data-index="{{index}}">×</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 技能认证 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">技能认证</view>
+        <button class="add-btn-small" bindtap="goToSkillExam">+ 去认证</button>
+      </view>
+      
+      <!-- 已获得证书列表 -->
+      <view class="cert-list" wx:if="{{certificates.length > 0}}">
+        <view class="cert-card" wx:for="{{certificates}}" wx:key="_id">
+          <view class="cert-badge">
+            <text class="badge-icon">🏆</text>
+            <text class="badge-level" style="color: {{item.levelColor}};">{{item.level}}</text>
+          </view>
+          <view class="cert-info-box">
+            <text class="cert-category">{{item.category}}</text>
+            <text class="cert-score">得分：{{item.score}}分 | 正确率：{{item.accuracy}}%</text>
+          </view>
+          <text class="cert-arrow" bindtap="viewCertificate" data-id="{{item._id}}">查看 ></text>
+        </view>
+      </view>
+      
+      <!-- 无证书提示 -->
+      <view class="cert-tip" wx:if="{{certificates.length === 0}}">
+        <text>🏆 通过技能认证考试，获得证书，提升岗位匹配度</text>
+      </view>
+    </view>
+
+    <!-- 工作经历 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">工作经历</view>
+        <button class="add-btn-small" bindtap="addWorkExperience">+ 添加</button>
+      </view>
+      <view class="experience-list">
+        <view class="experience-item" wx:for="{{resume.workExperiences}}" wx:key="index">
+          <view class="exp-header">
+            <text class="exp-title">{{item.company}} - {{item.position}}</text>
+            <view class="exp-actions">
+              <text class="edit-btn" bindtap="editWorkExperience" data-index="{{index}}">编辑</text>
+              <text class="remove-btn" bindtap="removeWorkExperience" data-index="{{index}}">删除</text>
+            </view>
+          </view>
+          <text class="exp-time">{{item.startDate}} 至 {{item.endDate}}</text>
+          <text class="exp-desc">{{item.description}}</text>
+        </view>
+        <view class="empty" wx:if="{{!resume.workExperiences || resume.workExperiences.length === 0}}">
+          <text>暂无工作经历</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 教育经历 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">教育经历</view>
+        <button class="add-btn-small" bindtap="addEducationExperience">+ 添加</button>
+      </view>
+      <view class="experience-list">
+        <view class="experience-item" wx:for="{{resume.educationExperiences}}" wx:key="index">
+          <view class="exp-header">
+            <text class="exp-title">{{item.school}} - {{item.major}}</text>
+            <view class="exp-actions">
+              <text class="edit-btn" bindtap="editEducationExperience" data-index="{{index}}">编辑</text>
+              <text class="remove-btn" bindtap="removeEducationExperience" data-index="{{index}}">删除</text>
+            </view>
+          </view>
+          <text class="exp-time">{{item.startDate}} 至 {{item.endDate}}</text>
+          <text class="exp-desc">{{item.degree}}</text>
+        </view>
+        <view class="empty" wx:if="{{!resume.educationExperiences || resume.educationExperiences.length === 0}}">
+          <text>暂无教育经历</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 自我评价 -->
+    <view class="section">
+      <view class="section-title">自我评价</view>
+      <textarea class="textarea" placeholder="请输入自我评价" value="{{resume.selfIntroduction}}" data-field="selfIntroduction" bindinput="onInput" maxlength="500" />
+    </view>
+
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <button class="btn-secondary" bindtap="previewResume">预览</button>
+    <button class="btn-primary" bindtap="saveResume">保存</button>
+  </view>
+</view>

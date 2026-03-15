@@ -1,0 +1,66 @@
+<!-- 企业岗位管理页 -->
+<view class="container">
+  <view class="list">
+    <view class="job-item" wx:for="{{jobs}}" wx:key="_id">
+      <!-- 头部信息 -->
+      <view class="item-header">
+        <text class="job-title">{{item.title}}</text>
+        <text class="status-tag {{item.status === 'active' ? 'active' : 'inactive'}}">
+          {{item.status === 'active' ? '✅ 招聘中' : '🚫 已关闭'}}
+        </text>
+      </view>
+      
+      <!-- 详细信息 -->
+      <view class="job-detail">
+        <view class="detail-row">
+          <text class="salary">￥{{item.salaryMin}}-{{item.salaryMax}}K</text>
+          <text class="divider">|</text>
+          <text class="info-text">📍 {{item.city}}</text>
+        </view>
+        <view class="detail-row" wx:if="{{item.experience || item.education}}">
+          <text class="info-text" wx:if="{{item.experience}}">💼 {{item.experience}}</text>
+          <text class="divider" wx:if="{{item.experience && item.education}}">|</text>
+          <text class="info-text" wx:if="{{item.education}}">🎓 {{item.education}}</text>
+        </view>
+      </view>
+
+      <!-- 技能标签 -->
+      <view class="skill-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+        <text class="skill-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="actions">
+        <button class="action-btn primary" bindtap="viewApplications" data-id="{{item._id}}">
+          <text class="btn-icon">📄</text>
+          <text>已投递</text>
+        </button>
+        <button class="action-btn secondary" bindtap="goToEdit" data-id="{{item._id}}">
+          <text class="btn-icon">✏️</text>
+          <text>编辑</text>
+        </button>
+        <button class="action-btn warning" bindtap="deleteJob" data-id="{{item._id}}" data-title="{{item.title}}">
+          <text class="btn-icon">🗑️</text>
+          <text>删除</text>
+        </button>
+        <button class="action-btn {{item.status === 'active' ? 'danger' : 'success'}}" bindtap="toggleStatus" data-id="{{item._id}}" data-status="{{item.status}}">
+          <text class="btn-icon">{{item.status === 'active' ? '🚫' : '✅'}}</text>
+          <text>{{item.status === 'active' ? '关闭' : '开启'}}</text>
+        </button>
+      </view>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{!loading && jobs.length === 0}}">
+      <text class="empty-icon">📋</text>
+      <text class="empty-title">暂无岗位</text>
+      <text class="empty-desc">您还没有发布任何岗位</text>
+    </view>
+  </view>
+  
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text class="loading-icon">⏳</text>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

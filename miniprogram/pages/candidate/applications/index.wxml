@@ -1,0 +1,35 @@
+<!-- 投递记录页 -->
+<view class="container">
+  <view class="list">
+    <view 
+      class="application-item" 
+      wx:for="{{applications}}" 
+      wx:key="_id"
+      style="transform: translateX({{item.translateX || 0}}rpx)"
+      bindtouchstart="touchStart"
+      bindtouchmove="touchMove"
+      bindtouchend="touchEnd"
+      data-index="{{index}}"
+      data-id="{{item._id}}"
+    >
+      <view class="item-content" bindtap="goToJobDetail" data-jobid="{{item.jobId}}" data-status="{{item.status}}">
+        <view class="item-header">
+          <text class="job-title">{{item.jobTitle}}</text>
+          <text class="status status-{{item.status}}">{{statusMap[item.status]}}</text>
+        </view>
+        <view class="company-name">{{item.companyName}}</view>
+        <view class="time">投递时间：{{item.createTime}}</view>
+      </view>
+      <view class="action-bar">
+        <button class="interview-btn" catchtap="goToInterview" data-jobid="{{item.jobId}}" data-status="{{item.status}}">
+          <text class="btn-icon">💼</text>
+          <text>面试</text>
+        </button>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!loading && applications.length === 0}}">
+      <text>暂无投递记录</text>
+    </view>
+  </view>
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+</view>
